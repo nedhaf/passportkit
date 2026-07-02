@@ -2,10 +2,11 @@
 
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
-  useState,
+  useSyncExternalStore,
   type ReactNode,
 } from "react";
 import {
@@ -24,8 +25,9 @@ type LanguageContextValue = {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 const storageKey = "passportkit-locale";
+const localeChangeEvent = "passportkit-locale-change";
 
-function getInitialLocale(): Locale {
+function getStoredLocale(): Locale {
   if (typeof window === "undefined") {
     return defaultLocale;
   }
@@ -34,13 +36,31 @@ function getInitialLocale(): Locale {
   return isLocale(savedLocale) ? savedLocale : defaultLocale;
 }
 
+function subscribeToLocaleChanges(onStoreChange: () => void) {
+  window.addEventListener("storage", onStoreChange);
+  window.addEventListener(localeChangeEvent, onStoreChange);
+
+  return () => {
+    window.removeEventListener("storage", onStoreChange);
+    window.removeEventListener(localeChangeEvent, onStoreChange);
+  };
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [locale, setLocale] = useState<Locale>(() => getInitialLocale());
+  const locale = useSyncExternalStore(
+    subscribeToLocaleChanges,
+    getStoredLocale,
+    () => defaultLocale,
+  );
 
   useEffect(() => {
-    window.localStorage.setItem(storageKey, locale);
     document.documentElement.lang = locale;
   }, [locale]);
+
+  const setLocale = useCallback((nextLocale: Locale) => {
+    window.localStorage.setItem(storageKey, nextLocale);
+    window.dispatchEvent(new Event(localeChangeEvent));
+  }, []);
 
   const value = useMemo<LanguageContextValue>(
     () => ({
@@ -48,7 +68,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       setLocale,
       t: (key) => translate(locale, key),
     }),
-    [locale],
+    [locale, setLocale],
   );
 
   return (
