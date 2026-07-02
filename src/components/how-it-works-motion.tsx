@@ -9,38 +9,46 @@ import {
   ShieldCheck,
   Shirt,
   Upload,
+  type LucideIcon,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLanguage } from "@/components/language-provider";
+import type { TranslationKey } from "@/lib/i18n";
 
 const steps = [
   {
-    title: "Import product data",
-    body: "Shopify fields, SKUs, descriptions, images, and variants become structured passport records.",
+    title: "workflow.import.title",
+    body: "workflow.import.body",
     icon: Upload,
     progress: 32,
   },
   {
-    title: "Complete missing fields",
-    body: "Materials, origin, care, repair, recycling, and safety notes move into a guided readiness checklist.",
+    title: "workflow.complete.title",
+    body: "workflow.complete.body",
     icon: FileCheck2,
     progress: 72,
   },
   {
-    title: "Publish QR passport",
-    body: "A shopper-facing passport page and QR label are generated from the completed product record.",
+    title: "workflow.publish.title",
+    body: "workflow.publish.body",
     icon: QrCode,
     progress: 100,
   },
-];
+] satisfies {
+  title: TranslationKey;
+  body: TranslationKey;
+  icon: LucideIcon;
+  progress: number;
+}[];
 
 const checklist = [
-  { label: "Materials", icon: Shirt },
-  { label: "Origin", icon: MapPin },
-  { label: "Care", icon: FileCheck2 },
-  { label: "Repair", icon: BadgeCheck },
-  { label: "Recycling", icon: Recycle },
-  { label: "Safety", icon: ShieldCheck },
-];
+  { label: "passport.materials", icon: Shirt },
+  { label: "passport.origin", icon: MapPin },
+  { label: "passport.careInstructions", icon: FileCheck2 },
+  { label: "passport.repairNotes", icon: BadgeCheck },
+  { label: "passport.recycling", icon: Recycle },
+  { label: "passport.safetyNotes", icon: ShieldCheck },
+] satisfies { label: TranslationKey; icon: LucideIcon }[];
 
 function clamp(value: number) {
   return Math.min(Math.max(value, 0), 1);
@@ -70,6 +78,7 @@ function QrMark({ active }: { active: boolean }) {
 export function HowItWorksMotion() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [progress, setProgress] = useState(0);
+  const { t } = useLanguage();
 
   useEffect(() => {
     let frame = 0;
@@ -120,15 +129,14 @@ export function HowItWorksMotion() {
         <div className="mb-10 grid gap-8 lg:grid-cols-[0.78fr_1fr] lg:items-end">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2455a4]">
-              How it works
+              {t("workflow.kicker")}
             </p>
             <h2 className="mt-3 text-3xl font-semibold md:text-4xl">
-              From Shopify catalog to EU QR passport.
+              {t("workflow.title")}
             </h2>
           </div>
           <p className="max-w-2xl leading-8 text-[#526057]">
-            Scroll this section to watch the same product move through three
-            clear stages: import, complete, publish.
+            {t("workflow.body")}
           </p>
         </div>
 
@@ -142,8 +150,8 @@ export function HowItWorksMotion() {
                 <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-md bg-[#eef6ef] text-[#237047]">
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
-                <h3 className="text-xl font-semibold">{title}</h3>
-                <p className="mt-3 leading-7 text-[#526057]">{body}</p>
+                <h3 className="text-xl font-semibold">{t(title)}</h3>
+                <p className="mt-3 leading-7 text-[#526057]">{t(body)}</p>
               </div>
             ))}
           </div>
@@ -164,11 +172,11 @@ export function HowItWorksMotion() {
                   <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <p className="text-sm font-semibold uppercase tracking-[0.16em] text-[#2455a4]">
-                  Step 0{index + 1}
+                  {t("workflow.stepLabel")} 0{index + 1}
                 </p>
-                <h3 className="mt-3 text-3xl font-semibold">{title}</h3>
+                <h3 className="mt-3 text-3xl font-semibold">{t(title)}</h3>
                 <p className="mt-4 max-w-xl text-lg leading-8 text-[#526057]">
-                  {body}
+                  {t(body)}
                 </p>
               </article>
             ))}
@@ -184,10 +192,10 @@ export function HowItWorksMotion() {
               <div className="flex items-center justify-between">
                 <span className="flex items-center gap-2 text-sm font-semibold">
                   <ActiveIcon className="h-4 w-4 text-[#2455a4]" />
-                  {activeStep.title}
+                  {t(activeStep.title)}
                 </span>
                 <span className="rounded-full bg-[#eef6ef] px-3 py-1 text-xs font-semibold text-[#237047]">
-                  {readyPercent}% ready
+                  {readyPercent}% {t("demo.ready")}
                 </span>
               </div>
 
@@ -203,7 +211,7 @@ export function HowItWorksMotion() {
                     <Upload className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-[#6b746d]">
-                    Shopify import
+                    {t("workflow.shopifyImport")}
                   </p>
                   <h3 className="mt-3 text-xl font-semibold">Linen Overshirt</h3>
                   <p className="mt-1 text-sm text-[#526057]">LOS-001 · Apparel</p>
@@ -230,12 +238,12 @@ export function HowItWorksMotion() {
                     <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#eef6ef] text-[#237047]">
                       <FileCheck2 className="h-5 w-5" aria-hidden="true" />
                     </div>
-                    <span className="rounded-full bg-[#fff8e8] px-2 py-1 text-xs font-semibold text-[#8a5b00]">
+                      <span className="rounded-full bg-[#fff8e8] px-2 py-1 text-xs font-semibold text-[#8a5b00]">
                       checklist
                     </span>
                   </div>
                   <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-[#6b746d]">
-                    Passport record
+                    {t("workflow.passportRecord")}
                   </p>
                   <div className="mt-4 h-2 overflow-hidden rounded-full bg-[#edf1ea]">
                     <div
@@ -257,12 +265,12 @@ export function HowItWorksMotion() {
                         >
                           <span className="flex items-center gap-2 font-semibold">
                             <Icon className="h-4 w-4" aria-hidden="true" />
-                            {label}
+                            {t(label)}
                           </span>
                           {done ? (
                             <BadgeCheck className="h-4 w-4" aria-hidden="true" />
                           ) : (
-                            <span>Missing</span>
+                            <span>{t("demo.missing")}</span>
                           )}
                         </div>
                       );
@@ -286,9 +294,11 @@ export function HowItWorksMotion() {
                     </span>
                   </div>
                   <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
-                    QR passport
+                    {t("workflow.qrPassport")}
                   </p>
-                  <h3 className="mt-3 text-xl font-semibold">Public page</h3>
+                  <h3 className="mt-3 text-xl font-semibold">
+                    {t("workflow.publicPage")}
+                  </h3>
                   <div className="relative mt-5 overflow-hidden rounded-lg">
                     <QrMark active={publishStage > 0.35} />
                     <span
@@ -297,8 +307,7 @@ export function HowItWorksMotion() {
                     />
                   </div>
                   <p className="mt-5 text-sm leading-6 text-white/70">
-                    A scan-ready page for materials, care, origin, repair, and
-                    recycling information.
+                    {t("workflow.scanReady")}
                   </p>
                 </div>
               </div>
@@ -310,20 +319,22 @@ export function HowItWorksMotion() {
         <div className="mt-5 rounded-lg border border-[#dfe5dc] bg-[#f7f8f5] p-5">
           <div className="grid gap-5 md:grid-cols-[220px_1fr_auto] md:items-center">
             <div>
-              <p className="text-sm font-semibold">Example use case</p>
+              <p className="text-sm font-semibold">
+                {t("workflow.exampleUseCase")}
+              </p>
               <p className="mt-1 text-sm text-[#6b746d]">Linen Overshirt</p>
             </div>
             <div className="grid gap-2 sm:grid-cols-3">
               {[
-                "Import product from Shopify",
-                "Fill recycling and safety notes",
-                "Publish QR passport page",
+                "workflow.useCase.import",
+                "workflow.useCase.complete",
+                "workflow.useCase.publish",
               ].map((item) => (
                 <div
                   className="rounded-md border border-[#dfe5dc] bg-white px-3 py-2 text-sm font-medium text-[#526057]"
                   key={item}
                 >
-                  {item}
+                  {t(item as TranslationKey)}
                 </div>
               ))}
             </div>
@@ -331,7 +342,7 @@ export function HowItWorksMotion() {
               className="rounded-md bg-[#17211b] px-4 py-2 text-center text-sm font-semibold text-white"
               href="/products/linen-overshirt"
             >
-              Try the flow
+              {t("workflow.tryFlow")}
             </a>
           </div>
         </div>

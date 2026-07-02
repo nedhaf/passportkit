@@ -10,36 +10,49 @@ import {
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
 import { HowItWorksMotion } from "@/components/how-it-works-motion";
+import { T } from "@/components/i18n-text";
 import { LandingExperience } from "@/components/landing-experience";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { Logo } from "@/components/logo";
+import type { TranslationKey } from "@/lib/i18n";
 
 const passportSections = [
-  { label: "Materials", icon: Shirt },
-  { label: "Care instructions", icon: FileCheck2 },
-  { label: "Origin", icon: MapPin },
-  { label: "Repair notes", icon: Wrench },
-  { label: "Recycling", icon: Recycle },
-  { label: "Safety notes", icon: ShieldCheck },
-];
+  { label: "passport.materials", icon: Shirt },
+  { label: "passport.careInstructions", icon: FileCheck2 },
+  { label: "passport.origin", icon: MapPin },
+  { label: "passport.repairNotes", icon: Wrench },
+  { label: "passport.recycling", icon: Recycle },
+  { label: "passport.safetyNotes", icon: ShieldCheck },
+] satisfies { label: TranslationKey; icon: typeof Shirt }[];
+
+const navLinks = [
+  { href: "#workflow", label: "nav.howItWorks" },
+  { href: "#passport", label: "nav.passportContents" },
+  { href: "#readiness", label: "nav.readiness" },
+] satisfies { href: string; label: TranslationKey }[];
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#f7f8f5] text-[#17211b]">
       <section className="px-6 py-6">
         <nav className="mx-auto flex max-w-7xl items-center justify-between">
-          <Link className="text-lg font-semibold" href="/">
-            PassportKit
-          </Link>
+          <Logo />
           <div className="hidden items-center gap-8 text-sm font-medium text-[#526057] md:flex">
-            <a href="#workflow">How it works</a>
-            <a href="#passport">Passport contents</a>
-            <a href="#readiness">Readiness</a>
+            {navLinks.map((item) => (
+              <a href={item.href} key={item.href}>
+                <T k={item.label} />
+              </a>
+            ))}
           </div>
-          <Link
-            className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white"
-            href="/dashboard"
-          >
-            View demo
-          </Link>
+          <div className="flex items-center gap-2">
+            <LanguageSwitcher />
+            <Link
+              className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white"
+              href="/dashboard"
+            >
+              <T k="nav.viewDemo" />
+            </Link>
+          </div>
         </nav>
       </section>
 
@@ -47,16 +60,13 @@ export default function Home() {
         <div className="mx-auto grid min-h-[calc(100vh-9rem)] max-w-7xl items-center gap-12 lg:grid-cols-[1fr_560px]">
           <div className="max-w-3xl">
             <div className="mb-6 inline-flex rounded-full border border-[#cfd8cf] bg-white px-3 py-1 text-sm font-medium text-[#2455a4]">
-              Built for Shopify fashion and accessory brands
+              <T k="hero.badge" />
             </div>
             <h1 className="text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-[#111814] md:text-7xl">
-              EU-ready QR product passports for small fashion brands.
+              <T k="hero.title" />
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[#526057] md:text-xl">
-              Import products, complete missing details, and publish
-              mobile-friendly passport pages for materials, care, origin,
-              repair, and recycling information before your EU readiness
-              deadline.
+              <T k="hero.body" />
             </p>
             <div className="mt-6 max-w-xl">
               <DeadlineTimer />
@@ -66,17 +76,17 @@ export default function Home() {
                 className="rounded-md bg-[#17211b] px-5 py-3 text-sm font-semibold text-white shadow-sm"
                 href="/dashboard"
               >
-                Create your first passport
+                <T k="hero.primary" />
               </Link>
               <Link
                 className="rounded-md border border-[#c7d2c4] bg-white px-5 py-3 text-sm font-semibold text-[#17211b]"
                 href="/dashboard"
               >
-                View product dashboard
+                <T k="hero.secondary" />
               </Link>
             </div>
             <p className="mt-5 text-sm text-[#6b746d]">
-              Readiness support, not legal advice.
+              <T k="hero.disclaimer" />
             </p>
           </div>
 
@@ -90,15 +100,13 @@ export default function Home() {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1fr] lg:items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2455a4]">
-              Passport contents
+              <T k="passport.kicker" />
             </p>
             <h2 className="mt-3 text-3xl font-semibold">
-              Make product information scannable, structured, and brand-safe.
+              <T k="passport.title" />
             </h2>
             <p className="mt-5 leading-8 text-[#526057]">
-              PassportKit helps small teams organize the product facts they
-              already have scattered across spreadsheets, product pages,
-              supplier emails, and care labels.
+              <T k="passport.body" />
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -108,7 +116,7 @@ export default function Home() {
                 key={label}
               >
                 <Icon className="h-4 w-4 text-[#237047]" aria-hidden="true" />
-                {label}
+                <T k={label} />
               </div>
             ))}
           </div>
@@ -120,21 +128,20 @@ export default function Home() {
           <div className="max-w-2xl">
             <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold text-white">
               <BadgeCheck className="h-4 w-4" aria-hidden="true" />
-              EU readiness target: November 28, 2026
+              <T k="readiness.badge" />
             </div>
             <h2 className="text-3xl font-semibold">
-              Start with a readiness prototype, then validate with real brands.
+              <T k="readiness.title" />
             </h2>
             <p className="mt-4 leading-8 text-white/70">
-              The first version focuses on clarity: import products, see what
-              is missing, and publish a credible QR passport page.
+              <T k="readiness.body" />
             </p>
           </div>
           <Link
             className="w-fit rounded-md bg-white px-5 py-3 text-sm font-semibold text-[#17211b]"
             href="/dashboard"
           >
-            Open dashboard
+            <T k="readiness.cta" />
           </Link>
         </div>
       </section>

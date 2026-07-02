@@ -2,6 +2,7 @@
 
 import { Clock3 } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/components/language-provider";
 
 const deadline = new Date("2026-11-28T00:00:00+01:00").getTime();
 
@@ -21,6 +22,7 @@ function getTimeLeft(): TimeLeft {
 }
 
 export function DeadlineTimer({ compact = false }: { compact?: boolean }) {
+  const { t } = useLanguage();
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(() => getTimeLeft());
 
   useEffect(() => {
@@ -35,7 +37,9 @@ export function DeadlineTimer({ compact = false }: { compact?: boolean }) {
     return (
       <div className="flex items-center gap-2 rounded-md border border-[#ead7a2] bg-[#fff8e8] px-3 py-2 text-sm font-semibold text-[#8a5b00]">
         <Clock3 className="h-4 w-4 shrink-0" aria-hidden="true" />
-        <span className="tabular-nums">{timeLeft.days} days left</span>
+        <span className="tabular-nums">
+          {timeLeft.days} {t("timer.compact")}
+        </span>
       </div>
     );
   }
@@ -44,7 +48,7 @@ export function DeadlineTimer({ compact = false }: { compact?: boolean }) {
     <div className="rounded-lg border border-[#ead7a2] bg-[#fff8e8] px-5 py-4">
       <div className="flex items-center gap-2 text-sm font-semibold text-[#8a5b00]">
         <Clock3 className="h-4 w-4 shrink-0" aria-hidden="true" />
-        Countdown to EU readiness deadline
+        {t("timer.title")}
       </div>
       <div className="mt-3 flex flex-wrap items-end gap-x-4 gap-y-2">
         {[
@@ -56,12 +60,14 @@ export function DeadlineTimer({ compact = false }: { compact?: boolean }) {
             <span className="text-4xl font-semibold leading-none tracking-[-0.02em] text-[#17211b] tabular-nums md:text-5xl">
               {value}
             </span>
-            <span className="text-sm font-medium text-[#6b746d]">{label}</span>
+            <span className="text-sm font-medium text-[#6b746d]">
+              {t(`timer.${label}` as "timer.days" | "timer.hours" | "timer.minutes")}
+            </span>
           </span>
         ))}
       </div>
       <p className="mt-3 text-xs leading-5 text-[#6b746d]">
-        Target date: November 28, 2026.
+        {t("timer.target")}
       </p>
     </div>
   );

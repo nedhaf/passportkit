@@ -12,6 +12,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
+import { T } from "@/components/i18n-text";
+import { LanguageSwitcher } from "@/components/language-switcher";
 import { featuredProduct } from "@/lib/products";
 
 const steps = [
@@ -59,7 +61,7 @@ export default function ProductWizardPage() {
         <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
             <Link className="text-sm font-semibold text-[#2455a4]" href="/dashboard">
-              ← Back to dashboard
+              ← <T k="wizard.back" />
             </Link>
             <h1 className="mt-2 text-3xl font-semibold">
               {featuredProduct.name}
@@ -70,10 +72,11 @@ export default function ProductWizardPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
+            <LanguageSwitcher />
             <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
               <span className="flex items-center gap-2">
                 <Save className="h-4 w-4" aria-hidden="true" />
-                Save draft
+                <T k="wizard.saveDraft" />
               </span>
             </button>
             <Link
@@ -82,13 +85,13 @@ export default function ProductWizardPage() {
             >
               <span className="flex items-center gap-2">
                 <Eye className="h-4 w-4" aria-hidden="true" />
-                Preview QR page
+                <T k="wizard.preview" />
               </span>
             </Link>
             <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white">
               <span className="flex items-center gap-2">
                 <QrCode className="h-4 w-4" aria-hidden="true" />
-                Publish passport
+                <T k="wizard.publish" />
               </span>
             </button>
           </div>
@@ -100,7 +103,7 @@ export default function ProductWizardPage() {
           <div className="px-2 py-2">
             <p className="flex items-center gap-2 text-sm font-semibold">
               <FileCheck2 className="h-4 w-4 text-[#2455a4]" />
-              Passport wizard
+              <T k="wizard.title" />
             </p>
             <p className="mt-1 text-xs text-[#6b746d]">
               {featuredProduct.readiness}% complete
@@ -133,15 +136,15 @@ export default function ProductWizardPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-sm font-semibold text-[#2455a4]">
-                  EU readiness step
+                  <T k="wizard.stepKicker" />
                 </p>
                 <h2 className="mt-1 text-2xl font-semibold">
-                  Recycling and safety details
+                  <T k="wizard.stepTitle" />
                 </h2>
               </div>
               <span className="flex w-fit items-center gap-2 rounded-full bg-[#fff6df] px-3 py-1 text-sm font-semibold text-[#8a5b00]">
                 <AlertTriangle className="h-4 w-4" aria-hidden="true" />
-                2 fields need review
+                <T k="wizard.review" />
               </span>
             </div>
           </div>
@@ -152,9 +155,11 @@ export default function ProductWizardPage() {
                 <Globe2 className="h-5 w-5" aria-hidden="true" />
               </div>
               <div>
-                <p className="font-semibold">EU deadline tracker</p>
+                <p className="font-semibold">
+                  <T k="wizard.deadlineTitle" />
+                </p>
                 <p className="mt-1 text-sm leading-6 text-[#526057]">
-                  Complete this passport before November 28, 2026.
+                  <T k="wizard.deadlineBody" />
                 </p>
               </div>
             </div>
@@ -174,19 +179,19 @@ export default function ProductWizardPage() {
 
           <div className="flex flex-col gap-3 border-t border-[#dfe5dc] p-5 md:flex-row md:items-center md:justify-between">
             <p className="text-sm text-[#6b746d]">
-              Changes are saved to the draft passport before publishing.
+              <T k="wizard.saved" />
             </p>
             <div className="flex flex-wrap gap-3">
               <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
                 <span className="flex items-center gap-2">
                   <Download className="h-4 w-4" aria-hidden="true" />
-                  Download QR label
+                  <T k="wizard.download" />
                 </span>
               </button>
               <button className="rounded-md bg-[#2455a4] px-4 py-2 text-sm font-semibold text-white">
                 <span className="flex items-center gap-2">
                   <BadgeCheck className="h-4 w-4" aria-hidden="true" />
-                  Mark fields complete
+                  <T k="wizard.markComplete" />
                 </span>
               </button>
             </div>
@@ -199,10 +204,10 @@ export default function ProductWizardPage() {
               <div>
                 <p className="flex items-center gap-2 text-sm font-semibold">
                   <QrCode className="h-4 w-4 text-[#2455a4]" />
-                  Live passport preview
+                  <T k="wizard.previewTitle" />
                 </p>
                 <p className="text-xs text-[#6b746d]">
-                  Customer-facing QR page
+                  <T k="wizard.previewBody" />
                 </p>
               </div>
               <span className="rounded-full bg-[#edf3ff] px-2 py-1 text-xs font-semibold text-[#2455a4]">
@@ -242,7 +247,7 @@ export default function ProductWizardPage() {
               className="mt-4 block rounded-md bg-[#17211b] px-4 py-3 text-center text-sm font-semibold text-white"
               href="/p/linen-overshirt"
             >
-              Open public page
+              <T k="wizard.openPublic" />
             </Link>
           </div>
 

@@ -12,6 +12,9 @@ import {
   Wrench,
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
+import { T } from "@/components/i18n-text";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { Logo } from "@/components/logo";
 import { featuredProduct } from "@/lib/products";
 
 const details = [
@@ -45,20 +48,19 @@ export default function PublicPassportPage() {
     <main className="min-h-screen bg-[#f7f8f5] px-5 py-6 text-[#17211b]">
       <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1fr_420px] lg:items-start">
         <section className="hidden pt-8 lg:block">
-          <Link className="text-lg font-semibold" href="/">
-            PassportKit
-          </Link>
+          <div className="flex items-center justify-between">
+            <Logo />
+            <LanguageSwitcher />
+          </div>
           <div className="mt-16 max-w-xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2455a4]">
-              EU public QR preview
+              <T k="public.kicker" />
             </p>
             <h1 className="mt-4 text-5xl font-semibold leading-tight">
-              A shopper-facing product passport page.
+              <T k="public.title" />
             </h1>
             <p className="mt-5 text-lg leading-8 text-[#526057]">
-              This is the page a customer sees after scanning the QR code on a
-              garment label. It stays simple, readable, EU-aware, and
-              brand-safe.
+              <T k="public.body" />
             </p>
             <div className="mt-8">
               <DeadlineTimer compact />
@@ -67,7 +69,7 @@ export default function PublicPassportPage() {
               className="mt-8 inline-block rounded-md border border-[#c7d2c4] bg-white px-5 py-3 text-sm font-semibold"
               href="/products/linen-overshirt"
             >
-              Back to wizard
+              <T k="public.back" />
             </Link>
           </div>
         </section>
@@ -81,7 +83,7 @@ export default function PublicPassportPage() {
               <div className="flex h-full items-end justify-between p-5">
                 <div className="flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#17211b]">
                   <BadgeCheck className="h-3.5 w-3.5" aria-hidden="true" />
-                  EU product information
+                  <T k="public.badge" />
                 </div>
                 <div className="w-20 rounded-lg bg-white/90 p-2">
                   <QrMark />
@@ -92,7 +94,7 @@ export default function PublicPassportPage() {
 
           <div className="px-5 pb-6">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2455a4]">
-              EU product passport
+              <T k="public.passport" />
             </p>
             <h1 className="mt-3 text-3xl font-semibold">
               {featuredProduct.name}
@@ -122,7 +124,9 @@ export default function PublicPassportPage() {
             <div className="mt-6 rounded-lg bg-[#17211b] p-4 text-white">
               <div className="flex items-center justify-between gap-4">
                 <div>
-                  <p className="text-sm font-semibold">Last updated</p>
+                  <p className="text-sm font-semibold">
+                    <T k="public.lastUpdated" />
+                  </p>
                   <p className="mt-1 flex items-center gap-2 text-sm text-white/70">
                     <CalendarClock className="h-4 w-4" aria-hidden="true" />
                     {featuredProduct.lastUpdated}
@@ -130,7 +134,7 @@ export default function PublicPassportPage() {
                 </div>
                 <span className="flex items-center gap-1 rounded-full bg-[#2f9d62] px-3 py-1 text-xs font-semibold">
                   <Globe2 className="h-3.5 w-3.5" aria-hidden="true" />
-                  Active
+                  <T k="public.active" />
                 </span>
               </div>
             </div>
@@ -142,18 +146,17 @@ export default function PublicPassportPage() {
                 </div>
                 <div>
                   <p className="text-sm font-semibold">
-                    Deadline tracked: November 28, 2026
+                    <T k="public.deadline" />
                   </p>
                   <p className="mt-1 text-xs text-[#6b746d]">
-                    Passport content is prepared for this brand readiness
-                    workflow.
+                    <T k="public.deadlineBody" />
                   </p>
                 </div>
               </div>
             </div>
 
             <p className="mt-5 text-center text-xs text-[#6b746d]">
-              Powered by PassportKit · Readiness support, not legal advice.
+              <T k="public.powered" />
             </p>
           </div>
         </section>

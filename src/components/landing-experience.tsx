@@ -12,23 +12,25 @@ import {
   Wrench,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useLanguage } from "@/components/language-provider";
 import { products } from "@/lib/products";
+import type { TranslationKey } from "@/lib/i18n";
 
 const readinessFields = [
-  { label: "Materials", icon: Shirt },
-  { label: "Origin", icon: MapPin },
-  { label: "Care", icon: FileCheck2 },
-  { label: "Repair", icon: Wrench },
-  { label: "Recycling", icon: Recycle },
-  { label: "Safety", icon: ShieldCheck },
-];
+  { label: "passport.materials", id: "Materials", icon: Shirt },
+  { label: "passport.origin", id: "Origin", icon: MapPin },
+  { label: "passport.careInstructions", id: "Care", icon: FileCheck2 },
+  { label: "passport.repairNotes", id: "Repair", icon: Wrench },
+  { label: "passport.recycling", id: "Recycling", icon: Recycle },
+  { label: "passport.safetyNotes", id: "Safety", icon: ShieldCheck },
+] satisfies { label: TranslationKey; id: string; icon: typeof Shirt }[];
 
 function initialFields(productName: string) {
   return Object.fromEntries(
     readinessFields.map((field) => [
-      field.label,
+      field.id,
       productName === "Linen Overshirt"
-        ? !["Recycling", "Safety"].includes(field.label)
+        ? !["Recycling", "Safety"].includes(field.id)
         : true,
     ]),
   ) as Record<string, boolean>;
@@ -52,6 +54,7 @@ function QrMark() {
 }
 
 export function LandingExperience() {
+  const { t } = useLanguage();
   const [selectedSku, setSelectedSku] = useState(products[0].sku);
   const selectedProduct =
     products.find((product) => product.sku === selectedSku) ?? products[0];
@@ -82,14 +85,14 @@ export function LandingExperience() {
           <div>
             <p className="flex items-center gap-2 text-sm font-semibold">
               <ScanLine className="h-4 w-4 text-[#2455a4]" />
-              Interactive EU readiness demo
+              {t("demo.title")}
             </p>
             <p className="text-xs text-[#6b746d]">
-              Pick a product and complete passport fields.
+              {t("demo.body")}
             </p>
           </div>
           <span className="rounded-full bg-[#eef6ef] px-3 py-1 text-xs font-semibold text-[#237047]">
-            {readiness}% ready
+            {readiness}% {t("demo.ready")}
           </span>
         </div>
 
@@ -124,9 +127,9 @@ export function LandingExperience() {
 
         <div className="mt-5 rounded-md border border-[#e5ebe2] bg-[#fbfcfa] p-4">
           <div className="mb-3 flex items-center justify-between">
-            <p className="text-sm font-semibold">Passport fields</p>
+            <p className="text-sm font-semibold">{t("demo.fields")}</p>
             <p className="text-xs text-[#6b746d]">
-              {completedCount}/{readinessFields.length} complete
+              {completedCount}/{readinessFields.length} {t("demo.complete")}
             </p>
           </div>
           <div className="h-2 overflow-hidden rounded-full bg-[#edf1ea]">
@@ -136,27 +139,27 @@ export function LandingExperience() {
             />
           </div>
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
-            {readinessFields.map(({ label, icon: Icon }) => (
+            {readinessFields.map(({ label, id, icon: Icon }) => (
               <button
                 className={`flex items-center justify-between rounded-md border px-3 py-2 text-sm transition ${
-                  checked[label]
+                  checked[id]
                     ? "border-[#d7e8d8] bg-[#eef6ef] text-[#237047]"
                     : "border-[#ead7a2] bg-[#fff6df] text-[#8a5b00]"
                 }`}
-                key={label}
+                key={id}
                 onClick={() =>
                   setChecked((current) => ({
                     ...current,
-                    [label]: !current[label],
+                    [id]: !current[id],
                   }))
                 }
                 type="button"
               >
                 <span className="flex items-center gap-2 font-semibold">
                   <Icon className="h-4 w-4" />
-                  {label}
+                  {t(label)}
                 </span>
-                <span>{checked[label] ? "Done" : "Missing"}</span>
+                <span>{checked[id] ? t("demo.done") : t("demo.missing")}</span>
               </button>
             ))}
           </div>
@@ -167,10 +170,10 @@ export function LandingExperience() {
         <div className="mb-3 flex items-center justify-between">
           <span className="flex items-center gap-2 text-sm font-semibold">
             <QrCode className="h-4 w-4" />
-            Live QR passport
+            {t("demo.liveQr")}
           </span>
           <span className="rounded-full bg-[#2f9d62] px-2 py-1 text-xs">
-            Updating
+            {t("demo.updating")}
           </span>
         </div>
         <div className="grid grid-cols-[76px_1fr] gap-3">
@@ -181,8 +184,8 @@ export function LandingExperience() {
           <div>
             <p className="text-sm font-semibold">{selectedProduct.name}</p>
             <p className="mt-1 text-xs text-white/70">
-              {selectedProduct.materials}. {readiness}% ready for EU passport
-              publishing.
+              {selectedProduct.materials}. {readiness}%{" "}
+              {t("demo.readyForPublishing")}
             </p>
           </div>
         </div>

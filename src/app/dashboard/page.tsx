@@ -10,15 +10,19 @@ import {
   Upload,
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
+import { T } from "@/components/i18n-text";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { Logo } from "@/components/logo";
+import type { TranslationKey } from "@/lib/i18n";
 import { productStats, products, type Product } from "@/lib/products";
 
 const navItems = [
-  { label: "Dashboard", icon: LayoutDashboard },
-  { label: "Products", icon: Box },
-  { label: "Passports", icon: QrCode },
-  { label: "Imports", icon: Upload },
-  { label: "Settings", icon: Settings },
-];
+  { label: "dashboard.nav.dashboard", icon: LayoutDashboard },
+  { label: "dashboard.nav.products", icon: Box },
+  { label: "dashboard.nav.passports", icon: QrCode },
+  { label: "dashboard.nav.imports", icon: Upload },
+  { label: "dashboard.nav.settings", icon: Settings },
+] satisfies { label: TranslationKey; icon: typeof LayoutDashboard }[];
 
 function qrClass(status: Product["qrStatus"]) {
   if (status === "Published") {
@@ -37,14 +41,12 @@ export default function DashboardPage() {
     <main className="min-h-screen bg-[#f7f8f5] text-[#17211b]">
       <div className="grid min-h-screen lg:grid-cols-[248px_1fr]">
         <aside className="border-r border-[#dfe5dc] bg-white px-5 py-6">
-          <Link className="text-lg font-semibold" href="/">
-            PassportKit
-          </Link>
+          <Logo />
           <nav className="mt-10 space-y-1">
             {navItems.map(({ label, icon: Icon }) => (
               <a
                 className={`block rounded-md px-3 py-2 text-sm font-medium ${
-                  label === "Dashboard"
+                  label === "dashboard.nav.dashboard"
                     ? "bg-[#eef6ef] text-[#237047]"
                     : "text-[#526057] hover:bg-[#f7f8f5]"
                 }`}
@@ -53,16 +55,17 @@ export default function DashboardPage() {
               >
                 <span className="flex items-center gap-2">
                   <Icon className="h-4 w-4" aria-hidden="true" />
-                  {label}
+                  <T k={label} />
                 </span>
               </a>
             ))}
           </nav>
           <div className="mt-10 rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-4">
-            <p className="text-sm font-semibold">Readiness note</p>
+            <p className="text-sm font-semibold">
+              <T k="dashboard.noteTitle" />
+            </p>
             <p className="mt-2 text-sm leading-6 text-[#526057]">
-              PassportKit organizes product data and readiness documentation.
-              It is not legal advice.
+              <T k="dashboard.noteBody" />
             </p>
           </div>
         </aside>
@@ -71,23 +74,24 @@ export default function DashboardPage() {
           <header className="flex flex-col gap-4 border-b border-[#dfe5dc] pb-6 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm font-medium text-[#2455a4]">
-                EU product readiness
+                <T k="dashboard.kicker" />
               </p>
               <h1 className="mt-1 text-3xl font-semibold">
-                Fashion passport dashboard
+                <T k="dashboard.title" />
               </h1>
             </div>
             <div className="flex flex-wrap gap-3">
+              <LanguageSwitcher />
               <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
                 <span className="flex items-center gap-2">
                   <Upload className="h-4 w-4" aria-hidden="true" />
-                  Import Shopify CSV
+                  <T k="dashboard.import" />
                 </span>
               </button>
               <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white">
                 <span className="flex items-center gap-2">
                   <Box className="h-4 w-4" aria-hidden="true" />
-                  Add product
+                  <T k="dashboard.add" />
                 </span>
               </button>
             </div>
@@ -100,10 +104,11 @@ export default function DashboardPage() {
                   <Globe2 className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="font-semibold">EU readiness timeline</h2>
+                  <h2 className="font-semibold">
+                    <T k="dashboard.timelineTitle" />
+                  </h2>
                   <p className="mt-2 max-w-2xl text-sm leading-6 text-[#526057]">
-                    Use this dashboard to keep product passport data complete
-                    before the November 28, 2026 deadline you are tracking.
+                    <T k="dashboard.timelineBody" />
                   </p>
                 </div>
               </div>
@@ -113,28 +118,30 @@ export default function DashboardPage() {
 
           <div className="grid gap-4 py-6 md:grid-cols-4">
             {[
-              ["Products", productStats.total],
-              ["Ready", productStats.ready],
-              ["Need info", productStats.needInfo],
-              ["Published", productStats.published],
-            ].map(([label, value]) => (
+              ["dashboard.products", productStats.total, "products"],
+              ["dashboard.ready", productStats.ready, "ready"],
+              ["dashboard.needInfo", productStats.needInfo, "needInfo"],
+              ["dashboard.published", productStats.published, "published"],
+            ].map(([label, value, id]) => (
               <div
                 className="rounded-lg border border-[#dfe5dc] bg-white p-5"
                 key={label}
               >
                 <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-md bg-[#eef6ef] text-[#237047]">
-                  {label === "Products" ? (
+                  {id === "products" ? (
                     <Box className="h-5 w-5" aria-hidden="true" />
-                  ) : label === "Ready" ? (
+                  ) : id === "ready" ? (
                     <FileCheck2 className="h-5 w-5" aria-hidden="true" />
-                  ) : label === "Need info" ? (
+                  ) : id === "needInfo" ? (
                     <Gauge className="h-5 w-5" aria-hidden="true" />
                   ) : (
                     <QrCode className="h-5 w-5" aria-hidden="true" />
                   )}
                 </div>
                 <p className="text-3xl font-semibold">{value}</p>
-                <p className="mt-1 text-sm text-[#6b746d]">{label}</p>
+                <p className="mt-1 text-sm text-[#6b746d]">
+                  <T k={label as TranslationKey} />
+                </p>
               </div>
             ))}
           </div>
@@ -143,22 +150,28 @@ export default function DashboardPage() {
             <section className="overflow-hidden rounded-lg border border-[#dfe5dc] bg-white">
               <div className="flex flex-col gap-3 border-b border-[#dfe5dc] p-4 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <h2 className="font-semibold">Products</h2>
+                  <h2 className="font-semibold">
+                    <T k="dashboard.products" />
+                  </h2>
                   <p className="text-sm text-[#6b746d]">
-                    Track missing fields and QR publishing status.
+                    <T k="dashboard.tableBody" />
                   </p>
                 </div>
                 <div className="flex gap-2 text-sm">
-                  {["All", "Needs info", "Published"].map((filter) => (
+                  {[
+                    ["dashboard.filterAll", true],
+                    ["dashboard.filterNeeds", false],
+                    ["dashboard.published", false],
+                  ].map(([filter, active]) => (
                     <button
                       className={`rounded-md px-3 py-2 font-medium ${
-                        filter === "All"
+                        active
                           ? "bg-[#17211b] text-white"
                           : "border border-[#dfe5dc] bg-white text-[#526057]"
                       }`}
-                      key={filter}
+                      key={filter as string}
                     >
-                      {filter}
+                      <T k={filter as TranslationKey} />
                     </button>
                   ))}
                 </div>
@@ -218,7 +231,7 @@ export default function DashboardPage() {
                         <td className="px-4 py-4">
                           {product.missingFields.length === 0 ? (
                             <span className="rounded-full bg-[#eef6ef] px-2 py-1 text-xs font-semibold text-[#237047]">
-                              Complete
+                              <T k="dashboard.complete" />
                             </span>
                           ) : (
                             <span className="text-[#526057]">
@@ -243,7 +256,7 @@ export default function DashboardPage() {
                             className="font-semibold text-[#2455a4]"
                             href="/products/linen-overshirt"
                           >
-                            Open
+                            <T k="dashboard.open" />
                           </Link>
                         </td>
                       </tr>
@@ -255,11 +268,13 @@ export default function DashboardPage() {
 
             <aside className="space-y-6">
               <div className="rounded-lg border border-[#dfe5dc] bg-white p-5">
-                <h2 className="font-semibold">Readiness summary</h2>
+                <h2 className="font-semibold">
+                  <T k="dashboard.summary" />
+                </h2>
                 <div className="mt-5 flex items-end gap-3">
                   <span className="text-5xl font-semibold">73%</span>
                   <span className="pb-2 text-sm text-[#6b746d]">
-                    average completion
+                    <T k="dashboard.average" />
                   </span>
                 </div>
                 <div className="mt-5 space-y-3">
