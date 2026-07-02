@@ -30,7 +30,7 @@ export const translations = {
     "workflow.kicker": "How it works",
     "workflow.title": "From Shopify catalog to EU QR passport.",
     "workflow.body":
-      "Scroll this section to watch the same product move through three clear stages: import, complete, publish.",
+      "Three simple steps help you get ready for what comes next if you want to sell in the EU.",
     "workflow.stepLabel": "Step",
     "workflow.import.title": "Import product data",
     "workflow.import.body":
@@ -178,7 +178,7 @@ export const translations = {
     "workflow.kicker": "So funktioniert es",
     "workflow.title": "Vom Shopify-Katalog zum EU-QR-Produktpass.",
     "workflow.body":
-      "Scrolle durch diesen Abschnitt und sieh, wie dasselbe Produkt drei Schritte durchläuft: importieren, vervollständigen, veröffentlichen.",
+      "Drei einfache Schritte helfen dir, dich auf das vorzubereiten, was als Nächstes kommt, wenn du in der EU verkaufen willst.",
     "workflow.stepLabel": "Schritt",
     "workflow.import.title": "Produktdaten importieren",
     "workflow.import.body":
@@ -326,7 +326,7 @@ export const translations = {
     "workflow.kicker": "Så fungerar det",
     "workflow.title": "Från Shopify-katalog till EU QR-produktpass.",
     "workflow.body":
-      "Scrolla genom sektionen och se samma produkt gå genom tre tydliga steg: importera, komplettera, publicera.",
+      "Tre enkla steg hjälper dig att bli redo för det som kommer härnäst om du vill sälja i EU.",
     "workflow.stepLabel": "Steg",
     "workflow.import.title": "Importera produktdata",
     "workflow.import.body":
@@ -474,7 +474,7 @@ export const translations = {
     "workflow.kicker": "Kako radi",
     "workflow.title": "Od Shopify kataloga do EU QR pasoša proizvoda.",
     "workflow.body":
-      "Skrolaj kroz sekciju i vidi kako isti proizvod prolazi tri jasne faze: uvoz, dopuna, objava.",
+      "Tri jednostavna koraka pomažu ti da se pripremiš za ono što dolazi ako želiš prodavati u EU.",
     "workflow.stepLabel": "Korak",
     "workflow.import.title": "Uvezi podatke proizvoda",
     "workflow.import.body":
