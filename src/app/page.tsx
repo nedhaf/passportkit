@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
 import { LandingExperience } from "@/components/landing-experience";
+import { ScrollStory } from "@/components/scroll-story";
 
 const passportSections = [
   { label: "Materials", icon: Shirt },
@@ -49,6 +50,7 @@ export default function Home() {
             PassportKit
           </Link>
           <div className="hidden items-center gap-8 text-sm font-medium text-[#526057] md:flex">
+            <a href="#scroll-demo">Scroll demo</a>
             <a href="#workflow">How it works</a>
             <a href="#passport">Passport contents</a>
             <a href="#readiness">Readiness</a>
@@ -102,6 +104,8 @@ export default function Home() {
           <LandingExperience />
         </div>
       </section>
+
+      <ScrollStory />
 
       <section className="bg-white px-6 py-16" id="workflow">
         <div className="mx-auto max-w-7xl">
