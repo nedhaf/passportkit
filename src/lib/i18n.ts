@@ -22,6 +22,11 @@ export const translations = {
     "hero.primary": "Create your first passport",
     "hero.secondary": "View product dashboard",
     "hero.disclaimer": "Readiness support, not legal advice.",
+    "euSource.label": "Official EU source",
+    "euSource.title": "EU 2030 textile strategy and Digital Product Passports",
+    "euSource.body":
+      "The European Commission links sustainable textiles with clearer product information, including Digital Product Passports, as part of its 2030 circular textiles strategy.",
+    "euSource.link": "Read the EU textile strategy",
     "workflow.kicker": "How it works",
     "workflow.title": "From Shopify catalog to EU QR passport.",
     "workflow.body":
@@ -164,6 +169,11 @@ export const translations = {
     "hero.primary": "Ersten Pass erstellen",
     "hero.secondary": "Produktdashboard ansehen",
     "hero.disclaimer": "Unterstützung zur Vorbereitung, keine Rechtsberatung.",
+    "euSource.label": "Offizielle EU-Quelle",
+    "euSource.title": "EU-Textilstrategie 2030 und digitale Produktpässe",
+    "euSource.body":
+      "Die Europäische Kommission verbindet nachhaltige Textilien mit klareren Produktinformationen, einschließlich digitaler Produktpässe, als Teil ihrer Strategie für zirkuläre Textilien bis 2030.",
+    "euSource.link": "EU-Textilstrategie lesen",
     "workflow.kicker": "So funktioniert es",
     "workflow.title": "Vom Shopify-Katalog zum EU-QR-Produktpass.",
     "workflow.body":
@@ -306,6 +316,11 @@ export const translations = {
     "hero.primary": "Skapa första passet",
     "hero.secondary": "Visa produktdashboard",
     "hero.disclaimer": "Beredskapsstöd, inte juridisk rådgivning.",
+    "euSource.label": "Officiell EU-källa",
+    "euSource.title": "EU:s textilstrategi 2030 och digitala produktpass",
+    "euSource.body":
+      "Europeiska kommissionen kopplar hållbara textilier till tydligare produktinformation, inklusive digitala produktpass, som en del av sin strategi för cirkulära textilier till 2030.",
+    "euSource.link": "Läs EU:s textilstrategi",
     "workflow.kicker": "Så fungerar det",
     "workflow.title": "Från Shopify-katalog till EU QR-produktpass.",
     "workflow.body":
@@ -448,6 +463,11 @@ export const translations = {
     "hero.primary": "Kreiraj prvi pasoš",
     "hero.secondary": "Pogledaj dashboard",
     "hero.disclaimer": "Podrška za spremnost, ne pravni savjet.",
+    "euSource.label": "Zvanični EU izvor",
+    "euSource.title": "EU tekstilna strategija 2030 i digitalni pasoši proizvoda",
+    "euSource.body":
+      "Evropska komisija povezuje održivi tekstil sa jasnijim informacijama o proizvodu, uključujući digitalne pasoše proizvoda, kao dio strategije cirkularnog tekstila do 2030.",
+    "euSource.link": "Pročitaj EU tekstilnu strategiju",
     "workflow.kicker": "Kako radi",
     "workflow.title": "Od Shopify kataloga do EU QR pasoša proizvoda.",
     "workflow.body":

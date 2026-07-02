@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   BadgeCheck,
+  ExternalLink,
   FileCheck2,
   MapPin,
   Recycle,
@@ -72,6 +73,31 @@ export default function Home() {
             <div className="mt-6 max-w-xl">
               <DeadlineTimer />
             </div>
+            <a
+              className="mt-4 flex max-w-xl items-start gap-3 rounded-lg border border-[#c9d8ef] bg-[#f4f7ff] p-4 text-left shadow-sm shadow-[#2455a4]/5 transition hover:-translate-y-0.5 hover:border-[#9eb6de] hover:bg-white hover:shadow-md"
+              href="https://environment.ec.europa.eu/strategy/textiles-strategy_en"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-white text-[#2455a4]">
+                <ExternalLink className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <span>
+                <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#2455a4]">
+                  <T k="euSource.label" />
+                </span>
+                <span className="mt-1 block text-sm font-semibold text-[#17211b]">
+                  <T k="euSource.title" />
+                </span>
+                <span className="mt-2 block text-sm leading-6 text-[#526057]">
+                  <T k="euSource.body" />
+                </span>
+                <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#2455a4]">
+                  <T k="euSource.link" />
+                  <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
+                </span>
+              </span>
+            </a>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
                 className="rounded-md bg-[#17211b] px-5 py-3 text-sm font-semibold text-white shadow-sm"
