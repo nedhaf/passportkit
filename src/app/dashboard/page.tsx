@@ -1,7 +1,24 @@
 import Link from "next/link";
+import {
+  Box,
+  FileCheck2,
+  Gauge,
+  Globe2,
+  LayoutDashboard,
+  QrCode,
+  Settings,
+  Upload,
+} from "lucide-react";
+import { DeadlineTimer } from "@/components/deadline-timer";
 import { productStats, products, type Product } from "@/lib/products";
 
-const navItems = ["Dashboard", "Products", "Passports", "Imports", "Settings"];
+const navItems = [
+  { label: "Dashboard", icon: LayoutDashboard },
+  { label: "Products", icon: Box },
+  { label: "Passports", icon: QrCode },
+  { label: "Imports", icon: Upload },
+  { label: "Settings", icon: Settings },
+];
 
 function qrClass(status: Product["qrStatus"]) {
   if (status === "Published") {
@@ -24,17 +41,20 @@ export default function DashboardPage() {
             PassportKit
           </Link>
           <nav className="mt-10 space-y-1">
-            {navItems.map((item) => (
+            {navItems.map(({ label, icon: Icon }) => (
               <a
                 className={`block rounded-md px-3 py-2 text-sm font-medium ${
-                  item === "Dashboard"
+                  label === "Dashboard"
                     ? "bg-[#eef6ef] text-[#237047]"
                     : "text-[#526057] hover:bg-[#f7f8f5]"
                 }`}
                 href="#"
-                key={item}
+                key={label}
               >
-                {item}
+                <span className="flex items-center gap-2">
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  {label}
+                </span>
               </a>
             ))}
           </nav>
@@ -51,7 +71,7 @@ export default function DashboardPage() {
           <header className="flex flex-col gap-4 border-b border-[#dfe5dc] pb-6 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="text-sm font-medium text-[#2455a4]">
-                Product readiness
+                EU product readiness
               </p>
               <h1 className="mt-1 text-3xl font-semibold">
                 Fashion passport dashboard
@@ -59,13 +79,37 @@ export default function DashboardPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
-                Import Shopify CSV
+                <span className="flex items-center gap-2">
+                  <Upload className="h-4 w-4" aria-hidden="true" />
+                  Import Shopify CSV
+                </span>
               </button>
               <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white">
-                Add product
+                <span className="flex items-center gap-2">
+                  <Box className="h-4 w-4" aria-hidden="true" />
+                  Add product
+                </span>
               </button>
             </div>
           </header>
+
+          <div className="grid gap-4 pt-6 lg:grid-cols-[1fr_360px]">
+            <div className="rounded-lg border border-[#dfe5dc] bg-white p-5">
+              <div className="flex items-start gap-3">
+                <div className="rounded-md bg-[#edf3ff] p-2 text-[#2455a4]">
+                  <Globe2 className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div>
+                  <h2 className="font-semibold">EU readiness timeline</h2>
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-[#526057]">
+                    Use this dashboard to keep product passport data complete
+                    before the November 28, 2026 deadline you are tracking.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <DeadlineTimer compact />
+          </div>
 
           <div className="grid gap-4 py-6 md:grid-cols-4">
             {[
@@ -78,6 +122,17 @@ export default function DashboardPage() {
                 className="rounded-lg border border-[#dfe5dc] bg-white p-5"
                 key={label}
               >
+                <div className="mb-4 flex h-9 w-9 items-center justify-center rounded-md bg-[#eef6ef] text-[#237047]">
+                  {label === "Products" ? (
+                    <Box className="h-5 w-5" aria-hidden="true" />
+                  ) : label === "Ready" ? (
+                    <FileCheck2 className="h-5 w-5" aria-hidden="true" />
+                  ) : label === "Need info" ? (
+                    <Gauge className="h-5 w-5" aria-hidden="true" />
+                  ) : (
+                    <QrCode className="h-5 w-5" aria-hidden="true" />
+                  )}
+                </div>
                 <p className="text-3xl font-semibold">{value}</p>
                 <p className="mt-1 text-sm text-[#6b746d]">{label}</p>
               </div>

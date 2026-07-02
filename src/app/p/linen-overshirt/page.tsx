@@ -1,13 +1,26 @@
 import Link from "next/link";
+import {
+  BadgeCheck,
+  CalendarClock,
+  FileCheck2,
+  Globe2,
+  MapPin,
+  QrCode,
+  Recycle,
+  ShieldCheck,
+  Shirt,
+  Wrench,
+} from "lucide-react";
+import { DeadlineTimer } from "@/components/deadline-timer";
 import { featuredProduct } from "@/lib/products";
 
 const details = [
-  ["Materials", featuredProduct.materials],
-  ["Origin", featuredProduct.origin],
-  ["Care", featuredProduct.care],
-  ["Repair", featuredProduct.repair],
-  ["Recycling", featuredProduct.recycling],
-  ["Safety", featuredProduct.safety],
+  { label: "Materials", value: featuredProduct.materials, icon: Shirt },
+  { label: "Origin", value: featuredProduct.origin, icon: MapPin },
+  { label: "Care", value: featuredProduct.care, icon: FileCheck2 },
+  { label: "Repair", value: featuredProduct.repair, icon: Wrench },
+  { label: "Recycling", value: featuredProduct.recycling, icon: Recycle },
+  { label: "Safety", value: featuredProduct.safety, icon: ShieldCheck },
 ];
 
 function QrMark() {
@@ -37,15 +50,19 @@ export default function PublicPassportPage() {
           </Link>
           <div className="mt-16 max-w-xl">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2455a4]">
-              Public QR preview
+              EU public QR preview
             </p>
             <h1 className="mt-4 text-5xl font-semibold leading-tight">
               A shopper-facing product passport page.
             </h1>
             <p className="mt-5 text-lg leading-8 text-[#526057]">
               This is the page a customer sees after scanning the QR code on a
-              garment label. It stays simple, readable, and brand-safe.
+              garment label. It stays simple, readable, EU-aware, and
+              brand-safe.
             </p>
+            <div className="mt-8">
+              <DeadlineTimer compact />
+            </div>
             <Link
               className="mt-8 inline-block rounded-md border border-[#c7d2c4] bg-white px-5 py-3 text-sm font-semibold"
               href="/products/linen-overshirt"
@@ -62,8 +79,9 @@ export default function PublicPassportPage() {
               style={{ backgroundColor: featuredProduct.color }}
             >
               <div className="flex h-full items-end justify-between p-5">
-                <div className="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#17211b]">
-                  Verified product information
+                <div className="flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-[#17211b]">
+                  <BadgeCheck className="h-3.5 w-3.5" aria-hidden="true" />
+                  EU product information
                 </div>
                 <div className="w-20 rounded-lg bg-white/90 p-2">
                   <QrMark />
@@ -74,7 +92,7 @@ export default function PublicPassportPage() {
 
           <div className="px-5 pb-6">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#2455a4]">
-              Product passport
+              EU product passport
             </p>
             <h1 className="mt-3 text-3xl font-semibold">
               {featuredProduct.name}
@@ -85,12 +103,15 @@ export default function PublicPassportPage() {
             </p>
 
             <div className="mt-6 space-y-3">
-              {details.map(([label, value]) => (
+              {details.map(({ label, value, icon: Icon }) => (
                 <section
                   className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-4"
                   key={label}
                 >
-                  <h2 className="text-sm font-semibold">{label}</h2>
+                  <h2 className="flex items-center gap-2 text-sm font-semibold">
+                    <Icon className="h-4 w-4 text-[#237047]" aria-hidden="true" />
+                    {label}
+                  </h2>
                   <p className="mt-2 text-sm leading-6 text-[#526057]">
                     {value}
                   </p>
@@ -102,13 +123,32 @@ export default function PublicPassportPage() {
               <div className="flex items-center justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold">Last updated</p>
-                  <p className="mt-1 text-sm text-white/70">
+                  <p className="mt-1 flex items-center gap-2 text-sm text-white/70">
+                    <CalendarClock className="h-4 w-4" aria-hidden="true" />
                     {featuredProduct.lastUpdated}
                   </p>
                 </div>
-                <span className="rounded-full bg-[#2f9d62] px-3 py-1 text-xs font-semibold">
+                <span className="flex items-center gap-1 rounded-full bg-[#2f9d62] px-3 py-1 text-xs font-semibold">
+                  <Globe2 className="h-3.5 w-3.5" aria-hidden="true" />
                   Active
                 </span>
+              </div>
+            </div>
+
+            <div className="mt-4 rounded-lg border border-[#dfe5dc] bg-white p-4">
+              <div className="flex items-center gap-3">
+                <div className="rounded-md bg-[#edf3ff] p-2 text-[#2455a4]">
+                  <QrCode className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="text-sm font-semibold">
+                    Deadline tracked: November 28, 2026
+                  </p>
+                  <p className="mt-1 text-xs text-[#6b746d]">
+                    Passport content is prepared for this brand readiness
+                    workflow.
+                  </p>
+                </div>
               </div>
             </div>
 

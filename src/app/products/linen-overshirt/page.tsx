@@ -1,4 +1,17 @@
 import Link from "next/link";
+import {
+  AlertTriangle,
+  BadgeCheck,
+  Download,
+  Eye,
+  FileCheck2,
+  Globe2,
+  QrCode,
+  Recycle,
+  Save,
+  ShieldCheck,
+} from "lucide-react";
+import { DeadlineTimer } from "@/components/deadline-timer";
 import { featuredProduct } from "@/lib/products";
 
 const steps = [
@@ -58,16 +71,25 @@ export default function ProductWizardPage() {
           </div>
           <div className="flex flex-wrap gap-3">
             <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
-              Save draft
+              <span className="flex items-center gap-2">
+                <Save className="h-4 w-4" aria-hidden="true" />
+                Save draft
+              </span>
             </button>
             <Link
               className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold"
               href="/p/linen-overshirt"
             >
-              Preview QR page
+              <span className="flex items-center gap-2">
+                <Eye className="h-4 w-4" aria-hidden="true" />
+                Preview QR page
+              </span>
             </Link>
             <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white">
-              Publish passport
+              <span className="flex items-center gap-2">
+                <QrCode className="h-4 w-4" aria-hidden="true" />
+                Publish passport
+              </span>
             </button>
           </div>
         </div>
@@ -76,7 +98,10 @@ export default function ProductWizardPage() {
       <div className="mx-auto grid max-w-7xl gap-6 px-6 py-6 xl:grid-cols-[220px_1fr_360px]">
         <aside className="h-fit rounded-lg border border-[#dfe5dc] bg-white p-3">
           <div className="px-2 py-2">
-            <p className="text-sm font-semibold">Passport wizard</p>
+            <p className="flex items-center gap-2 text-sm font-semibold">
+              <FileCheck2 className="h-4 w-4 text-[#2455a4]" />
+              Passport wizard
+            </p>
             <p className="mt-1 text-xs text-[#6b746d]">
               {featuredProduct.readiness}% complete
             </p>
@@ -108,15 +133,30 @@ export default function ProductWizardPage() {
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
                 <p className="text-sm font-semibold text-[#2455a4]">
-                  Current step
+                  EU readiness step
                 </p>
                 <h2 className="mt-1 text-2xl font-semibold">
                   Recycling and safety details
                 </h2>
               </div>
-              <span className="w-fit rounded-full bg-[#fff6df] px-3 py-1 text-sm font-semibold text-[#8a5b00]">
+              <span className="flex w-fit items-center gap-2 rounded-full bg-[#fff6df] px-3 py-1 text-sm font-semibold text-[#8a5b00]">
+                <AlertTriangle className="h-4 w-4" aria-hidden="true" />
                 2 fields need review
               </span>
+            </div>
+          </div>
+
+          <div className="border-b border-[#dfe5dc] bg-[#fbfcfa] p-5">
+            <div className="flex items-start gap-3">
+              <div className="rounded-md bg-[#edf3ff] p-2 text-[#2455a4]">
+                <Globe2 className="h-5 w-5" aria-hidden="true" />
+              </div>
+              <div>
+                <p className="font-semibold">EU deadline tracker</p>
+                <p className="mt-1 text-sm leading-6 text-[#526057]">
+                  Complete this passport before November 28, 2026.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -138,10 +178,16 @@ export default function ProductWizardPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
-                Download QR label
+                <span className="flex items-center gap-2">
+                  <Download className="h-4 w-4" aria-hidden="true" />
+                  Download QR label
+                </span>
               </button>
               <button className="rounded-md bg-[#2455a4] px-4 py-2 text-sm font-semibold text-white">
-                Mark fields complete
+                <span className="flex items-center gap-2">
+                  <BadgeCheck className="h-4 w-4" aria-hidden="true" />
+                  Mark fields complete
+                </span>
               </button>
             </div>
           </div>
@@ -151,7 +197,10 @@ export default function ProductWizardPage() {
           <div className="rounded-lg border border-[#dfe5dc] bg-white p-5">
             <div className="mb-4 flex items-center justify-between">
               <div>
-                <p className="text-sm font-semibold">Live passport preview</p>
+                <p className="flex items-center gap-2 text-sm font-semibold">
+                  <QrCode className="h-4 w-4 text-[#2455a4]" />
+                  Live passport preview
+                </p>
                 <p className="text-xs text-[#6b746d]">
                   Customer-facing QR page
                 </p>
@@ -197,12 +246,20 @@ export default function ProductWizardPage() {
             </Link>
           </div>
 
+          <DeadlineTimer />
+
           <div className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-5">
-            <h2 className="font-semibold">Audit trail</h2>
+            <h2 className="flex items-center gap-2 font-semibold">
+              <ShieldCheck className="h-4 w-4 text-[#237047]" />
+              Audit trail
+            </h2>
             <div className="mt-4 space-y-3 text-sm text-[#526057]">
               <p>Materials completed from supplier sheet.</p>
               <p>Origin confirmed by production invoice.</p>
-              <p>Recycling guidance still needs brand approval.</p>
+              <p>
+                <Recycle className="mr-2 inline h-4 w-4 text-[#8a5b00]" />
+                Recycling guidance still needs brand approval.
+              </p>
             </div>
           </div>
         </aside>

@@ -1,13 +1,44 @@
 import Link from "next/link";
+import {
+  BadgeCheck,
+  FileCheck2,
+  Globe2,
+  MapPin,
+  QrCode,
+  Recycle,
+  ShieldCheck,
+  Shirt,
+  Upload,
+  Wrench,
+} from "lucide-react";
+import { DeadlineTimer } from "@/components/deadline-timer";
 import { productStats, products } from "@/lib/products";
 
 const passportSections = [
-  "Materials",
-  "Care instructions",
-  "Origin",
-  "Repair notes",
-  "Recycling",
-  "Safety notes",
+  { label: "Materials", icon: Shirt },
+  { label: "Care instructions", icon: FileCheck2 },
+  { label: "Origin", icon: MapPin },
+  { label: "Repair notes", icon: Wrench },
+  { label: "Recycling", icon: Recycle },
+  { label: "Safety notes", icon: ShieldCheck },
+];
+
+const workflowSteps = [
+  {
+    title: "Import",
+    icon: Upload,
+    copy: "Start with Shopify CSV data: products, SKUs, descriptions, images and variants.",
+  },
+  {
+    title: "Complete",
+    icon: FileCheck2,
+    copy: "Use guided fields for materials, origin, care, repair, recycling and safety notes.",
+  },
+  {
+    title: "Publish",
+    icon: QrCode,
+    copy: "Generate a mobile passport page, QR label, and downloadable product record.",
+  },
 ];
 
 export default function Home() {
@@ -39,13 +70,17 @@ export default function Home() {
               Built for Shopify fashion and accessory brands
             </div>
             <h1 className="text-5xl font-semibold leading-[1.05] tracking-[-0.02em] text-[#111814] md:text-7xl">
-              QR product passports for small fashion brands.
+              EU-ready QR product passports for small fashion brands.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-[#526057] md:text-xl">
               Import products, complete missing details, and publish
               mobile-friendly passport pages for materials, care, origin,
-              repair, and recycling information.
+              repair, and recycling information before your EU readiness
+              deadline.
             </p>
+            <div className="mt-6 max-w-xl">
+              <DeadlineTimer />
+            </div>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link
                 className="rounded-md bg-[#17211b] px-5 py-3 text-sm font-semibold text-white shadow-sm"
@@ -69,7 +104,10 @@ export default function Home() {
             <div className="rounded-lg border border-[#dfe5dc] bg-white p-4 shadow-xl shadow-[#23432f]/10">
               <div className="mb-4 flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold">Product readiness</p>
+                  <p className="flex items-center gap-2 text-sm font-semibold">
+                    <Globe2 className="h-4 w-4 text-[#2455a4]" />
+                    EU product readiness
+                  </p>
                   <p className="text-xs text-[#6b746d]">
                     Imported from Shopify CSV
                   </p>
@@ -123,7 +161,10 @@ export default function Home() {
             </div>
             <div className="absolute -bottom-8 right-6 hidden w-64 rounded-lg border border-[#dfe5dc] bg-[#17211b] p-4 text-white shadow-xl md:block">
               <div className="mb-3 flex items-center justify-between">
-                <span className="text-sm font-semibold">QR passport</span>
+                <span className="flex items-center gap-2 text-sm font-semibold">
+                  <QrCode className="h-4 w-4" />
+                  QR passport
+                </span>
                 <span className="rounded-full bg-[#2f9d62] px-2 py-1 text-xs">
                   Live
                 </span>
@@ -165,26 +206,13 @@ export default function Home() {
             </h2>
           </div>
           <div className="grid gap-4 md:grid-cols-3">
-            {[
-              [
-                "Import",
-                "Start with Shopify CSV data: products, SKUs, descriptions, images and variants.",
-              ],
-              [
-                "Complete",
-                "Use guided fields for materials, origin, care, repair, recycling and safety notes.",
-              ],
-              [
-                "Publish",
-                "Generate a mobile passport page, QR label, and downloadable product record.",
-              ],
-            ].map(([title, copy], index) => (
+            {workflowSteps.map(({ title, icon: Icon, copy }) => (
               <div
                 className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-6"
                 key={title}
               >
                 <div className="mb-8 flex h-9 w-9 items-center justify-center rounded-md bg-[#eef6ef] text-sm font-semibold text-[#237047]">
-                  {index + 1}
+                  <Icon className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-semibold">{title}</h3>
                 <p className="mt-3 leading-7 text-[#526057]">{copy}</p>
@@ -210,13 +238,13 @@ export default function Home() {
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
-            {passportSections.map((section) => (
+            {passportSections.map(({ label, icon: Icon }) => (
               <div
-                className="rounded-md border border-[#dfe5dc] bg-white p-4 text-sm font-semibold"
-                key={section}
+                className="flex items-center gap-3 rounded-md border border-[#dfe5dc] bg-white p-4 text-sm font-semibold"
+                key={label}
               >
-                <span className="mr-3 inline-block h-2.5 w-2.5 rounded-full bg-[#2f9d62]" />
-                {section}
+                <Icon className="h-4 w-4 text-[#237047]" aria-hidden="true" />
+                {label}
               </div>
             ))}
           </div>
@@ -226,6 +254,10 @@ export default function Home() {
       <section className="bg-[#17211b] px-6 py-16 text-white" id="readiness">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold text-white">
+              <BadgeCheck className="h-4 w-4" aria-hidden="true" />
+              EU readiness target: November 28, 2026
+            </div>
             <h2 className="text-3xl font-semibold">
               Start with a readiness prototype, then validate with real brands.
             </h2>
