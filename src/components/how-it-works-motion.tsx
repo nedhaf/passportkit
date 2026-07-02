@@ -303,8 +303,6 @@ export function HowItWorksMotion() {
                 </div>
               </div>
 
-              <div className="pointer-events-none absolute left-[31%] top-[52%] h-0.5 w-[11%] bg-[#cfd8cf]" />
-              <div className="pointer-events-none absolute right-[31%] top-[52%] h-0.5 w-[11%] bg-[#cfd8cf]" />
             </div>
           </div>
         </div>
