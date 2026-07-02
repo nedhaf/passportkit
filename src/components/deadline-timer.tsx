@@ -31,35 +31,33 @@ export function DeadlineTimer({ compact = false }: { compact?: boolean }) {
     return () => window.clearInterval(interval);
   }, []);
 
-  const values = timeLeft ?? { days: 0, hours: 0, minutes: 0 };
-
   if (compact) {
     return (
-      <div className="flex items-center gap-2 rounded-md bg-[#fff6df] px-3 py-2 text-sm font-semibold text-[#8a5b00]">
-        <Clock3 className="h-4 w-4" aria-hidden="true" />
-        <span>{values.days} days left</span>
+      <div className="flex items-center gap-2 rounded-md border border-[#ead7a2] bg-[#fff8e8] px-3 py-2 text-sm font-semibold text-[#8a5b00]">
+        <Clock3 className="h-4 w-4 shrink-0" aria-hidden="true" />
+        <span className="tabular-nums">{timeLeft.days} days left</span>
       </div>
     );
   }
 
   return (
-    <div className="rounded-lg border border-[#ead7a2] bg-[#fff8e8] p-4">
+    <div className="rounded-lg border border-[#ead7a2] bg-[#fff8e8] px-5 py-4">
       <div className="flex items-center gap-2 text-sm font-semibold text-[#8a5b00]">
-        <Clock3 className="h-4 w-4" aria-hidden="true" />
-        EU readiness deadline
+        <Clock3 className="h-4 w-4 shrink-0" aria-hidden="true" />
+        Countdown to EU readiness deadline
       </div>
-      <div className="mt-3 grid grid-cols-3 gap-2">
+      <div className="mt-3 flex flex-wrap items-end gap-x-4 gap-y-2">
         {[
-          ["Days", values.days],
-          ["Hours", values.hours],
-          ["Minutes", values.minutes],
+          ["days", timeLeft.days],
+          ["hours", timeLeft.hours],
+          ["minutes", timeLeft.minutes],
         ].map(([label, value]) => (
-          <div className="rounded-md bg-white px-3 py-2" key={label}>
-            <p className="text-2xl font-semibold text-[#17211b]">
+          <span className="inline-flex items-baseline gap-1" key={label}>
+            <span className="text-4xl font-semibold leading-none tracking-[-0.02em] text-[#17211b] tabular-nums md:text-5xl">
               {value}
-            </p>
-            <p className="text-xs text-[#6b746d]">{label}</p>
-          </div>
+            </span>
+            <span className="text-sm font-medium text-[#6b746d]">{label}</span>
+          </span>
         ))}
       </div>
       <p className="mt-3 text-xs leading-5 text-[#6b746d]">
