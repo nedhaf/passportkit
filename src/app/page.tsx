@@ -14,6 +14,7 @@ import { T } from "@/components/i18n-text";
 import { LandingExperience } from "@/components/landing-experience";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { Logo } from "@/components/logo";
+import { SiteFooter } from "@/components/site-footer";
 import type { TranslationKey } from "@/lib/i18n";
 
 const passportSections = [
@@ -145,6 +146,8 @@ export default function Home() {
           </Link>
         </div>
       </section>
+
+      <SiteFooter />
     </main>
   );
 }

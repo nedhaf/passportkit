@@ -135,6 +135,20 @@ export const translations = {
     "public.deadlineBody":
       "Passport content is prepared for this brand readiness workflow.",
     "public.powered": "Powered by PassportKit · Readiness support, not legal advice.",
+    "footer.description":
+      "A lightweight product passport workspace for small fashion teams preparing QR-ready EU product information.",
+    "footer.product": "Product",
+    "footer.company": "Company",
+    "footer.legal": "Legal",
+    "footer.dashboard": "Dashboard",
+    "footer.qrPreview": "QR preview",
+    "footer.productFlow": "Product flow",
+    "footer.deadline": "EU readiness target",
+    "footer.contact": "Contact",
+    "footer.privacy": "Privacy",
+    "footer.terms": "Terms",
+    "footer.disclaimer": "Readiness support, not legal advice.",
+    "footer.copyright": "© 2026 PassportKit. Built for EU-ready product clarity.",
   },
   de: {
     "nav.howItWorks": "So funktioniert es",
@@ -261,6 +275,20 @@ export const translations = {
     "public.deadlineBody":
       "Der Passinhalt ist für diesen Marken-Bereitschaftsworkflow vorbereitet.",
     "public.powered": "Bereitgestellt von PassportKit · Vorbereitungshilfe, keine Rechtsberatung.",
+    "footer.description":
+      "Ein schlanker Produktpass-Arbeitsbereich für kleine Modeteams, die QR-fähige EU-Produktinformationen vorbereiten.",
+    "footer.product": "Produkt",
+    "footer.company": "Unternehmen",
+    "footer.legal": "Rechtliches",
+    "footer.dashboard": "Dashboard",
+    "footer.qrPreview": "QR-Vorschau",
+    "footer.productFlow": "Produktflow",
+    "footer.deadline": "EU-Bereitschaftsziel",
+    "footer.contact": "Kontakt",
+    "footer.privacy": "Datenschutz",
+    "footer.terms": "Bedingungen",
+    "footer.disclaimer": "Vorbereitungshilfe, keine Rechtsberatung.",
+    "footer.copyright": "© 2026 PassportKit. Gebaut für EU-fähige Produktklarheit.",
   },
   sv: {
     "nav.howItWorks": "Så fungerar det",
@@ -387,6 +415,20 @@ export const translations = {
     "public.deadlineBody":
       "Passinnehållet är förberett för detta beredskapsflöde.",
     "public.powered": "Drivs av PassportKit · Beredskapsstöd, inte juridisk rådgivning.",
+    "footer.description":
+      "En lätt produktpass-arbetsyta för små modeteam som förbereder QR-klara EU-produktuppgifter.",
+    "footer.product": "Produkt",
+    "footer.company": "Företag",
+    "footer.legal": "Juridiskt",
+    "footer.dashboard": "Dashboard",
+    "footer.qrPreview": "QR-förhandsvisning",
+    "footer.productFlow": "Produktflöde",
+    "footer.deadline": "EU-beredskapsmål",
+    "footer.contact": "Kontakt",
+    "footer.privacy": "Integritet",
+    "footer.terms": "Villkor",
+    "footer.disclaimer": "Beredskapsstöd, inte juridisk rådgivning.",
+    "footer.copyright": "© 2026 PassportKit. Byggt för EU-klar produkttydlighet.",
   },
   bs: {
     "nav.howItWorks": "Kako radi",
@@ -513,6 +555,20 @@ export const translations = {
     "public.deadlineBody":
       "Sadržaj pasoša je pripremljen za ovaj tok spremnosti brenda.",
     "public.powered": "Pokreće PassportKit · Podrška za spremnost, ne pravni savjet.",
+    "footer.description":
+      "Lagani workspace za pasoše proizvoda za male modne timove koji pripremaju QR-spremne EU informacije o proizvodu.",
+    "footer.product": "Proizvod",
+    "footer.company": "Kompanija",
+    "footer.legal": "Pravno",
+    "footer.dashboard": "Dashboard",
+    "footer.qrPreview": "QR pregled",
+    "footer.productFlow": "Tok proizvoda",
+    "footer.deadline": "EU cilj spremnosti",
+    "footer.contact": "Kontakt",
+    "footer.privacy": "Privatnost",
+    "footer.terms": "Uslovi",
+    "footer.disclaimer": "Podrška za spremnost, ne pravni savjet.",
+    "footer.copyright": "© 2026 PassportKit. Napravljeno za EU-spremnu jasnoću proizvoda.",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
