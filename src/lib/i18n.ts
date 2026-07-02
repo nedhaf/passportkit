@@ -47,6 +47,8 @@ export const translations = {
     "workflow.useCase.complete": "Fill recycling and safety notes",
     "workflow.useCase.publish": "Publish QR passport page",
     "workflow.tryFlow": "Try the flow",
+    "workflow.graphicsCredit":
+      "Clothing graphics by OpenMoji, licensed under CC BY-SA 4.0.",
     "passport.kicker": "Passport contents",
     "passport.title":
       "Make product information scannable, structured, and brand-safe.",
@@ -187,6 +189,8 @@ export const translations = {
     "workflow.useCase.complete": "Recycling- und Sicherheitshinweise ergänzen",
     "workflow.useCase.publish": "QR-Produktpass-Seite veröffentlichen",
     "workflow.tryFlow": "Flow testen",
+    "workflow.graphicsCredit":
+      "Kleidungsgrafiken von OpenMoji, lizenziert unter CC BY-SA 4.0.",
     "passport.kicker": "Passinhalt",
     "passport.title":
       "Produktinformationen scanbar, strukturiert und markensicher machen.",
@@ -327,6 +331,8 @@ export const translations = {
     "workflow.useCase.complete": "Fyll i återvinning och säkerhet",
     "workflow.useCase.publish": "Publicera QR-produktpass",
     "workflow.tryFlow": "Testa flödet",
+    "workflow.graphicsCredit":
+      "Klädgrafik av OpenMoji, licensierad under CC BY-SA 4.0.",
     "passport.kicker": "Passinnehåll",
     "passport.title":
       "Gör produktinformation skanningsbar, strukturerad och varumärkessäker.",
@@ -467,6 +473,8 @@ export const translations = {
     "workflow.useCase.complete": "Dopuni reciklažu i sigurnost",
     "workflow.useCase.publish": "Objavi QR pasoš stranicu",
     "workflow.tryFlow": "Isprobaj tok",
+    "workflow.graphicsCredit":
+      "Grafike odjeće su od OpenMoji, licencirane pod CC BY-SA 4.0.",
     "passport.kicker": "Sadržaj pasoša",
     "passport.title":
       "Pretvori informacije o proizvodu u skenirane, strukturisane i brand-safe podatke.",
