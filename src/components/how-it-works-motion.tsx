@@ -323,38 +323,6 @@ export function HowItWorksMotion() {
         </div>
       </div>
 
-      <div className="px-6 pb-16">
-        <div className="mx-auto rounded-lg border border-[#dfe5dc] bg-[#f7f8f5] p-5 lg:max-w-7xl">
-          <div className="grid gap-5 md:grid-cols-[220px_1fr_auto] md:items-center">
-            <div>
-              <p className="text-sm font-semibold">
-                {t("workflow.exampleUseCase")}
-              </p>
-              <p className="mt-1 text-sm text-[#6b746d]">Linen Overshirt</p>
-            </div>
-            <div className="grid gap-2 sm:grid-cols-3">
-              {[
-                "workflow.useCase.import",
-                "workflow.useCase.complete",
-                "workflow.useCase.publish",
-              ].map((item) => (
-                <div
-                  className="rounded-md border border-[#dfe5dc] bg-white px-3 py-2 text-sm font-medium text-[#526057]"
-                  key={item}
-                >
-                  {t(item as TranslationKey)}
-                </div>
-              ))}
-            </div>
-            <a
-              className="rounded-md bg-[#17211b] px-4 py-2 text-center text-sm font-semibold text-white"
-              href="/products/linen-overshirt"
-            >
-              {t("workflow.tryFlow")}
-            </a>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
