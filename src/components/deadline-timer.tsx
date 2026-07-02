@@ -31,6 +31,22 @@ const serverTimeLeft: TimeLeft = {
   seconds: 0,
 };
 
+let cachedSnapshotKey = "";
+let cachedSnapshot: TimeLeft = serverTimeLeft;
+
+function getClockSnapshot() {
+  const now = Date.now();
+  const remainingSeconds = Math.max(Math.floor((deadline - now) / 1000), 0);
+  const snapshotKey = String(remainingSeconds);
+
+  if (snapshotKey !== cachedSnapshotKey) {
+    cachedSnapshotKey = snapshotKey;
+    cachedSnapshot = getTimeLeft(now);
+  }
+
+  return cachedSnapshot;
+}
+
 function subscribeToClock(onStoreChange: () => void) {
   const interval = window.setInterval(onStoreChange, 1_000);
 
@@ -57,7 +73,7 @@ export function DeadlineTimer({ compact = false }: { compact?: boolean }) {
   const { t } = useLanguage();
   const visibleTimeLeft = useSyncExternalStore(
     subscribeToClock,
-    getTimeLeft,
+    getClockSnapshot,
     () => serverTimeLeft,
   );
 
