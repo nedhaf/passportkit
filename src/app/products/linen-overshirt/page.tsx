@@ -1,15 +1,19 @@
 import Link from "next/link";
 import {
   AlertTriangle,
+  ArrowUpRight,
   BadgeCheck,
+  CalendarClock,
   Download,
   Eye,
   FileCheck2,
   Globe2,
+  LockKeyhole,
   QrCode,
   Recycle,
   Save,
   ShieldCheck,
+  Sparkles,
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
 import { T } from "@/components/i18n-text";
@@ -57,48 +61,77 @@ function QrMark() {
 export default function ProductWizardPage() {
   return (
     <main className="min-h-screen bg-[#f7f8f5] text-[#17211b]">
-      <header className="border-b border-[#dfe5dc] bg-white px-6 py-4">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
+      <header className="border-b border-[#dfe5dc] bg-white px-6 py-5">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
             <Link className="text-sm font-semibold text-[#2455a4]" href="/dashboard">
               ← <T k="wizard.back" />
             </Link>
-            <h1 className="mt-2 text-3xl font-semibold">
+            <h1 className="mt-2 text-4xl font-semibold tracking-[-0.01em]">
               {featuredProduct.name}
             </h1>
             <p className="mt-1 text-sm text-[#6b746d]">
               {featuredProduct.sku} · {featuredProduct.category} ·{" "}
               {featuredProduct.brand}
             </p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <LanguageSwitcher />
+              <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]">
+                <span className="flex items-center gap-2">
+                  <Save className="h-4 w-4" aria-hidden="true" />
+                  <T k="wizard.saveDraft" />
+                </span>
+              </button>
+              <Link
+                className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]"
+                href="/p/linen-overshirt"
+              >
+                <span className="flex items-center gap-2">
+                  <Eye className="h-4 w-4" aria-hidden="true" />
+                  <T k="wizard.preview" />
+                </span>
+              </Link>
+              <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2a342d]">
+                <span className="flex items-center gap-2">
+                  <QrCode className="h-4 w-4" aria-hidden="true" />
+                  <T k="wizard.publish" />
+                </span>
+              </button>
+            </div>
           </div>
-          <div className="flex flex-wrap gap-3">
-            <LanguageSwitcher />
-            <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
-              <span className="flex items-center gap-2">
-                <Save className="h-4 w-4" aria-hidden="true" />
-                <T k="wizard.saveDraft" />
-              </span>
-            </button>
-            <Link
-              className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold"
-              href="/p/linen-overshirt"
-            >
-              <span className="flex items-center gap-2">
-                <Eye className="h-4 w-4" aria-hidden="true" />
-                <T k="wizard.preview" />
-              </span>
-            </Link>
-            <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white">
-              <span className="flex items-center gap-2">
-                <QrCode className="h-4 w-4" aria-hidden="true" />
-                <T k="wizard.publish" />
-              </span>
-            </button>
+
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {[
+              ["Readiness", `${featuredProduct.readiness}%`, FileCheck2],
+              ["Missing fields", "2", AlertTriangle],
+              ["QR status", featuredProduct.qrStatus, QrCode],
+            ].map(([label, value, Icon]) => (
+              <div
+                className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-4"
+                key={label as string}
+              >
+                <div className="flex items-center justify-between gap-4">
+                  <span>
+                    <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#6b746d]">
+                      {label as string}
+                    </span>
+                    <span className="mt-2 block text-2xl font-semibold">
+                      {value as string}
+                    </span>
+                  </span>
+                  <span className="flex h-10 w-10 items-center justify-center rounded-md bg-[#eef6ef] text-[#237047]">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </header>
 
-      <div className="mx-auto grid max-w-7xl gap-6 px-6 py-6 xl:grid-cols-[220px_1fr_360px]">
+      <div className="mx-auto grid max-w-7xl gap-6 px-6 py-6 xl:grid-cols-[240px_1fr_370px]">
         <aside className="h-fit rounded-lg border border-[#dfe5dc] bg-white p-3">
           <div className="px-2 py-2">
             <p className="flex items-center gap-2 text-sm font-semibold">
@@ -108,6 +141,12 @@ export default function ProductWizardPage() {
             <p className="mt-1 text-xs text-[#6b746d]">
               {featuredProduct.readiness}% complete
             </p>
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#edf1ea]">
+              <div
+                className="h-full rounded-full bg-[#d39b2a]"
+                style={{ width: `${featuredProduct.readiness}%` }}
+              />
+            </div>
           </div>
           <div className="mt-3 space-y-1">
             {steps.map(([step, state]) => (
@@ -131,7 +170,7 @@ export default function ProductWizardPage() {
           </div>
         </aside>
 
-        <section className="rounded-lg border border-[#dfe5dc] bg-white">
+        <section className="overflow-hidden rounded-lg border border-[#dfe5dc] bg-white">
           <div className="border-b border-[#dfe5dc] p-5">
             <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
               <div>
@@ -150,17 +189,25 @@ export default function ProductWizardPage() {
           </div>
 
           <div className="border-b border-[#dfe5dc] bg-[#fbfcfa] p-5">
-            <div className="flex items-start gap-3">
-              <div className="rounded-md bg-[#edf3ff] p-2 text-[#2455a4]">
-                <Globe2 className="h-5 w-5" aria-hidden="true" />
+            <div className="grid gap-4 md:grid-cols-[1fr_220px] md:items-center">
+              <div className="flex items-start gap-3">
+                <div className="rounded-md bg-[#edf3ff] p-2 text-[#2455a4]">
+                  <Globe2 className="h-5 w-5" aria-hidden="true" />
+                </div>
+                <div>
+                  <p className="font-semibold">
+                    <T k="wizard.deadlineTitle" />
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-[#526057]">
+                    <T k="wizard.deadlineBody" />
+                  </p>
+                </div>
               </div>
-              <div>
-                <p className="font-semibold">
-                  <T k="wizard.deadlineTitle" />
-                </p>
-                <p className="mt-1 text-sm leading-6 text-[#526057]">
-                  <T k="wizard.deadlineBody" />
-                </p>
+              <div className="rounded-md border border-[#ead7a2] bg-[#fff8e8] p-3 text-sm font-semibold text-[#8a5b00]">
+                <span className="flex items-center gap-2">
+                  <CalendarClock className="h-4 w-4" aria-hidden="true" />
+                  2 fields left before review
+                </span>
               </div>
             </div>
           </div>
@@ -199,7 +246,7 @@ export default function ProductWizardPage() {
         </section>
 
         <aside className="space-y-6">
-          <div className="rounded-lg border border-[#dfe5dc] bg-white p-5">
+          <div className="rounded-lg border border-[#dfe5dc] bg-white p-5 shadow-sm shadow-[#23432f]/5">
             <div className="mb-4 flex items-center justify-between">
               <div>
                 <p className="flex items-center gap-2 text-sm font-semibold">
@@ -244,14 +291,49 @@ export default function ProductWizardPage() {
             </div>
 
             <Link
-              className="mt-4 block rounded-md bg-[#17211b] px-4 py-3 text-center text-sm font-semibold text-white"
+              className="mt-4 flex items-center justify-center gap-2 rounded-md bg-[#17211b] px-4 py-3 text-center text-sm font-semibold text-white transition hover:bg-[#2a342d]"
               href="/p/linen-overshirt"
             >
               <T k="wizard.openPublic" />
+              <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
 
           <DeadlineTimer />
+
+          <div className="rounded-lg border border-[#dfe5dc] bg-white p-5">
+            <h2 className="flex items-center gap-2 font-semibold">
+              <Sparkles className="h-4 w-4 text-[#2455a4]" />
+              Publishing checklist
+            </h2>
+            <div className="mt-4 space-y-3">
+              {[
+                ["Care labels checked", true],
+                ["Supplier origin attached", true],
+                ["Recycling copy approved", false],
+                ["Safety notes reviewed", false],
+              ].map(([item, done]) => (
+                <div
+                  className="flex items-center justify-between rounded-md border border-[#edf1ea] bg-[#fbfcfa] px-3 py-2 text-sm"
+                  key={item as string}
+                >
+                  <span className="flex items-center gap-2 text-[#526057]">
+                    {done ? (
+                      <BadgeCheck className="h-4 w-4 text-[#237047]" />
+                    ) : (
+                      <LockKeyhole className="h-4 w-4 text-[#8a5b00]" />
+                    )}
+                    {item as string}
+                  </span>
+                  <span
+                    className={`h-2.5 w-2.5 rounded-full ${
+                      done ? "bg-[#2f9d62]" : "bg-[#d39b2a]"
+                    }`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
 
           <div className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-5">
             <h2 className="flex items-center gap-2 font-semibold">
