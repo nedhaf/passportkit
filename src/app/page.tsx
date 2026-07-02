@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   BadgeCheck,
   FileCheck2,
-  Globe2,
   MapPin,
   QrCode,
   Recycle,
@@ -12,7 +11,7 @@ import {
   Wrench,
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
-import { productStats, products } from "@/lib/products";
+import { LandingExperience } from "@/components/landing-experience";
 
 const passportSections = [
   { label: "Materials", icon: Shirt },
@@ -100,98 +99,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="relative">
-            <div className="rounded-lg border border-[#dfe5dc] bg-white p-4 shadow-xl shadow-[#23432f]/10">
-              <div className="mb-4 flex items-center justify-between">
-                <div>
-                  <p className="flex items-center gap-2 text-sm font-semibold">
-                    <Globe2 className="h-4 w-4 text-[#2455a4]" />
-                    EU product readiness
-                  </p>
-                  <p className="text-xs text-[#6b746d]">
-                    Imported from Shopify CSV
-                  </p>
-                </div>
-                <span className="rounded-full bg-[#eef6ef] px-3 py-1 text-xs font-semibold text-[#237047]">
-                  {productStats.ready}/{productStats.total} ready
-                </span>
-              </div>
-              <div className="grid grid-cols-3 gap-2">
-                {[
-                  ["Products", productStats.total],
-                  ["Need info", productStats.needInfo],
-                  ["Published", productStats.published],
-                ].map(([label, value]) => (
-                  <div
-                    className="rounded-md border border-[#e5ebe2] bg-[#fbfcfa] p-3"
-                    key={label}
-                  >
-                    <p className="text-2xl font-semibold">{value}</p>
-                    <p className="text-xs text-[#6b746d]">{label}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-4 space-y-2">
-                {products.slice(0, 4).map((product) => (
-                  <div
-                    className="grid grid-cols-[38px_1fr_auto] items-center gap-3 rounded-md border border-[#e5ebe2] bg-white p-3"
-                    key={product.sku}
-                  >
-                    <div
-                      className="h-10 rounded-md"
-                      style={{ backgroundColor: product.color }}
-                    />
-                    <div>
-                      <p className="text-sm font-semibold">{product.name}</p>
-                      <p className="text-xs text-[#6b746d]">
-                        {product.sku} · {product.category}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-sm font-semibold">
-                        {product.readiness}%
-                      </p>
-                      <p className="text-xs text-[#6b746d]">
-                        {product.qrStatus}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="absolute -bottom-8 right-6 hidden w-64 rounded-lg border border-[#dfe5dc] bg-[#17211b] p-4 text-white shadow-xl md:block">
-              <div className="mb-3 flex items-center justify-between">
-                <span className="flex items-center gap-2 text-sm font-semibold">
-                  <QrCode className="h-4 w-4" />
-                  QR passport
-                </span>
-                <span className="rounded-full bg-[#2f9d62] px-2 py-1 text-xs">
-                  Live
-                </span>
-              </div>
-              <div className="grid grid-cols-[72px_1fr] gap-3">
-                <div className="grid aspect-square grid-cols-4 gap-1 rounded bg-white p-2">
-                  {Array.from({ length: 16 }).map((_, index) => (
-                    <span
-                      className={
-                        index % 3 === 0 || index === 5
-                          ? "bg-[#17211b]"
-                          : "bg-[#dfe5dc]"
-                      }
-                      key={index}
-                    />
-                  ))}
-                </div>
-                <div>
-                  <p className="text-sm font-semibold">Linen Overshirt</p>
-                  <p className="mt-1 text-xs text-white/70">
-                    Materials, origin, care and repair details in one mobile
-                    page.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <LandingExperience />
         </div>
       </section>
 
@@ -208,7 +116,7 @@ export default function Home() {
           <div className="grid gap-4 md:grid-cols-3">
             {workflowSteps.map(({ title, icon: Icon, copy }) => (
               <div
-                className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-6"
+                className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-6 transition hover:-translate-y-1 hover:border-[#b9c9b6] hover:bg-white hover:shadow-lg hover:shadow-[#23432f]/10"
                 key={title}
               >
                 <div className="mb-8 flex h-9 w-9 items-center justify-center rounded-md bg-[#eef6ef] text-sm font-semibold text-[#237047]">
