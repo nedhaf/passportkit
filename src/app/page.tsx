@@ -3,14 +3,13 @@ import {
   BadgeCheck,
   FileCheck2,
   MapPin,
-  QrCode,
   Recycle,
   ShieldCheck,
   Shirt,
-  Upload,
   Wrench,
 } from "lucide-react";
 import { DeadlineTimer } from "@/components/deadline-timer";
+import { HowItWorksMotion } from "@/components/how-it-works-motion";
 import { LandingExperience } from "@/components/landing-experience";
 
 const passportSections = [
@@ -20,24 +19,6 @@ const passportSections = [
   { label: "Repair notes", icon: Wrench },
   { label: "Recycling", icon: Recycle },
   { label: "Safety notes", icon: ShieldCheck },
-];
-
-const workflowSteps = [
-  {
-    title: "Import",
-    icon: Upload,
-    copy: "Start with Shopify CSV data: products, SKUs, descriptions, images and variants.",
-  },
-  {
-    title: "Complete",
-    icon: FileCheck2,
-    copy: "Use guided fields for materials, origin, care, repair, recycling and safety notes.",
-  },
-  {
-    title: "Publish",
-    icon: QrCode,
-    copy: "Generate a mobile passport page, QR label, and downloadable product record.",
-  },
 ];
 
 export default function Home() {
@@ -103,67 +84,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="bg-white px-6 py-16" id="workflow">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-10 grid gap-8 lg:grid-cols-[0.8fr_1fr] lg:items-end">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.18em] text-[#2455a4]">
-                How it works
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold">
-                From Shopify catalog to EU QR passport.
-              </h2>
-            </div>
-            <p className="max-w-2xl leading-8 text-[#526057]">
-              Use PassportKit like a guided workspace: import what you already
-              have, complete the fields your products are missing, then publish
-              a mobile passport page your customers can scan.
-            </p>
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {workflowSteps.map(({ title, icon: Icon, copy }) => (
-              <div
-                className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-6 transition hover:-translate-y-1 hover:border-[#b9c9b6] hover:bg-white hover:shadow-lg hover:shadow-[#23432f]/10"
-                key={title}
-              >
-                <div className="mb-8 flex h-9 w-9 items-center justify-center rounded-md bg-[#eef6ef] text-sm font-semibold text-[#237047]">
-                  <Icon className="h-5 w-5" aria-hidden="true" />
-                </div>
-                <h3 className="text-xl font-semibold">{title}</h3>
-                <p className="mt-3 leading-7 text-[#526057]">{copy}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-5 rounded-lg border border-[#dfe5dc] bg-[#f7f8f5] p-5">
-            <div className="grid gap-5 md:grid-cols-[220px_1fr_auto] md:items-center">
-              <div>
-                <p className="text-sm font-semibold">Example use case</p>
-                <p className="mt-1 text-sm text-[#6b746d]">Linen Overshirt</p>
-              </div>
-              <div className="grid gap-2 sm:grid-cols-3">
-                {[
-                  "Import product from Shopify",
-                  "Fill recycling and safety notes",
-                  "Publish QR passport page",
-                ].map((item) => (
-                  <div
-                    className="rounded-md border border-[#dfe5dc] bg-white px-3 py-2 text-sm font-medium text-[#526057]"
-                    key={item}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-              <Link
-                className="rounded-md bg-[#17211b] px-4 py-2 text-center text-sm font-semibold text-white"
-                href="/products/linen-overshirt"
-              >
-                Try the flow
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HowItWorksMotion />
 
       <section className="px-6 py-16" id="passport">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1fr] lg:items-start">
