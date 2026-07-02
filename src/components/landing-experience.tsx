@@ -79,7 +79,7 @@ export function LandingExperience() {
   }
 
   return (
-    <div className="relative">
+    <div>
       <div className="rounded-lg border border-[#dfe5dc] bg-white p-4 shadow-xl shadow-[#23432f]/10">
         <div className="mb-4 flex items-start justify-between gap-4">
           <div>
@@ -166,7 +166,7 @@ export function LandingExperience() {
         </div>
       </div>
 
-      <div className="absolute -bottom-10 right-6 hidden w-72 rounded-lg border border-[#dfe5dc] bg-[#17211b] p-4 text-white shadow-xl md:block">
+      <div className="ml-auto mr-6 mt-4 hidden w-72 rounded-lg border border-[#dfe5dc] bg-[#17211b] p-4 text-white shadow-xl md:block">
         <div className="mb-3 flex items-center justify-between">
           <span className="flex items-center gap-2 text-sm font-semibold">
             <QrCode className="h-4 w-4" />
