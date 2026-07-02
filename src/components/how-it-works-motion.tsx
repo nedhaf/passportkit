@@ -33,11 +33,13 @@ const steps = [
   },
 ];
 
-const floatingFields = [
-  { label: "Materials", icon: Shirt, startX: -190, startY: -118, endX: -38, endY: -64 },
-  { label: "Origin", icon: MapPin, startX: 170, startY: -98, endX: 42, endY: -18 },
-  { label: "Recycling", icon: Recycle, startX: -175, startY: 112, endX: -36, endY: 40 },
-  { label: "Safety", icon: ShieldCheck, startX: 168, startY: 122, endX: 44, endY: 88 },
+const checklist = [
+  { label: "Materials", icon: Shirt },
+  { label: "Origin", icon: MapPin },
+  { label: "Care", icon: FileCheck2 },
+  { label: "Repair", icon: BadgeCheck },
+  { label: "Recycling", icon: Recycle },
+  { label: "Safety", icon: ShieldCheck },
 ];
 
 function clamp(value: number) {
@@ -48,14 +50,13 @@ function mix(start: number, end: number, amount: number) {
   return start + (end - start) * amount;
 }
 
-function QrMark({ progress }: { progress: number }) {
+function QrMark({ active }: { active: boolean }) {
   return (
     <div className="grid aspect-square grid-cols-6 gap-1 rounded-lg bg-white p-3">
       {Array.from({ length: 36 }).map((_, index) => (
         <span
-          className={`rounded-sm transition-colors duration-300 ${
-            (index + Math.round(progress * 10)) % 4 === 0 ||
-            [0, 1, 6, 7, 28, 29, 34, 35].includes(index)
+          className={`rounded-sm transition-colors duration-500 ${
+            active && ((index + 2) % 4 === 0 || [0, 1, 6, 7, 28, 29, 34, 35].includes(index))
               ? "bg-[#17211b]"
               : "bg-[#dfe5dc]"
           }`}
@@ -81,8 +82,7 @@ export function HowItWorksMotion() {
 
       const rect = section.getBoundingClientRect();
       const scrollable = rect.height - window.innerHeight;
-      const next = scrollable > 0 ? clamp(-rect.top / scrollable) : 0;
-      setProgress(next);
+      setProgress(scrollable > 0 ? clamp(-rect.top / scrollable) : 0);
     }
 
     function onScroll() {
@@ -102,21 +102,17 @@ export function HowItWorksMotion() {
   }, []);
 
   const activeIndex = useMemo(() => {
-    if (progress < 0.34) {
-      return 0;
-    }
-
-    if (progress < 0.68) {
-      return 1;
-    }
-
+    if (progress < 0.34) return 0;
+    if (progress < 0.68) return 1;
     return 2;
   }, [progress]);
 
   const activeStep = steps[activeIndex];
   const ActiveIcon = activeStep.icon;
-  const assembleProgress = clamp((progress - 0.18) / 0.48);
-  const publishProgress = clamp((progress - 0.62) / 0.3);
+  const importStage = clamp(progress / 0.32);
+  const completeStage = clamp((progress - 0.28) / 0.36);
+  const publishStage = clamp((progress - 0.64) / 0.28);
+  const readyPercent = Math.round(mix(32, 100, clamp(progress / 0.82)));
 
   return (
     <section ref={sectionRef} className="bg-white px-6" id="workflow">
@@ -131,9 +127,8 @@ export function HowItWorksMotion() {
             </h2>
           </div>
           <p className="max-w-2xl leading-8 text-[#526057]">
-            Scroll this section to see product information move from raw store
-            data into a completed passport record, then into a QR page customers
-            can scan.
+            Scroll this section to watch the same product move through three
+            clear stages: import, complete, publish.
           </p>
         </div>
 
@@ -154,8 +149,8 @@ export function HowItWorksMotion() {
           </div>
         </div>
 
-        <div className="hidden min-h-[250vh] lg:grid lg:grid-cols-[0.78fr_1fr] lg:gap-12">
-          <div className="space-y-[42vh] py-[20vh]">
+        <div className="hidden min-h-[220vh] lg:grid lg:grid-cols-[0.78fr_1fr] lg:gap-12">
+          <div className="space-y-[36vh] py-[18vh]">
             {steps.map(({ title, body, icon: Icon }, index) => (
               <article
                 className={`rounded-lg border p-6 transition-all duration-500 ${
@@ -180,9 +175,9 @@ export function HowItWorksMotion() {
           </div>
 
           <div className="sticky top-8 flex h-[calc(100vh-4rem)] items-center">
-            <div className="relative h-[640px] w-full overflow-hidden rounded-[28px] border border-[#dfe5dc] bg-[#f7f8f5] p-6 shadow-2xl shadow-[#23432f]/10">
+            <div className="relative h-[620px] w-full overflow-hidden rounded-[28px] border border-[#dfe5dc] bg-[#f7f8f5] p-6 shadow-2xl shadow-[#23432f]/10">
               <div
-                className="absolute left-0 top-0 h-1 bg-[#2f9d62]"
+                className="absolute left-0 top-0 h-1 bg-[#2f9d62] transition-[width] duration-150"
                 style={{ width: `${Math.round(progress * 100)}%` }}
               />
 
@@ -192,38 +187,65 @@ export function HowItWorksMotion() {
                   {activeStep.title}
                 </span>
                 <span className="rounded-full bg-[#eef6ef] px-3 py-1 text-xs font-semibold text-[#237047]">
-                  {activeStep.progress}% ready
+                  {readyPercent}% ready
                 </span>
               </div>
 
-              <div className="absolute left-7 top-24 w-52 rounded-lg border border-[#dfe5dc] bg-white p-4 shadow-sm">
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#6b746d]">
-                  Shopify import
-                </p>
-                <p className="mt-3 text-lg font-semibold">Linen Overshirt</p>
-                <p className="mt-1 text-sm text-[#526057]">LOS-001 · Apparel</p>
-                <div className="mt-4 h-2 rounded-full bg-[#edf1ea]">
-                  <div
-                    className="h-2 rounded-full bg-[#2455a4]"
-                    style={{ width: `${mix(28, 100, assembleProgress)}%` }}
-                  />
+              <div className="mt-7 grid h-[520px] grid-cols-3 gap-4">
+                <div
+                  className="rounded-2xl border border-[#dfe5dc] bg-white p-4 shadow-sm transition-all duration-300"
+                  style={{
+                    opacity: mix(1, 0.55, completeStage),
+                    transform: `translateX(${mix(0, 10, importStage)}px)`,
+                  }}
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#edf3ff] text-[#2455a4]">
+                    <Upload className="h-5 w-5" aria-hidden="true" />
+                  </div>
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-[#6b746d]">
+                    Shopify import
+                  </p>
+                  <h3 className="mt-3 text-xl font-semibold">Linen Overshirt</h3>
+                  <p className="mt-1 text-sm text-[#526057]">LOS-001 · Apparel</p>
+                  <div className="mt-5 space-y-2">
+                    {["SKU", "Product title", "Image", "Description"].map((item) => (
+                      <div
+                        className="rounded-md border border-[#edf1ea] bg-[#fbfcfa] px-3 py-2 text-sm font-medium text-[#526057]"
+                        key={item}
+                      >
+                        {item}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
 
-              <div
-                className="absolute left-1/2 top-48 h-72 w-72 -translate-x-1/2 rounded-[24px] border border-[#dfe5dc] bg-white p-5 shadow-xl transition-transform duration-200"
-                style={{
-                  transform: `translateX(-50%) scale(${mix(0.92, 1.05, publishProgress)})`,
-                }}
-              >
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#2455a4]">
-                  Passport record
-                </p>
-                <h3 className="mt-3 text-2xl font-semibold">Linen Overshirt</h3>
-                <div className="mt-5 space-y-2">
-                  {["Materials", "Origin", "Care", "Repair", "Recycling", "Safety"].map(
-                    (item, index) => {
-                      const done = assembleProgress > index / 7;
+                <div
+                  className="rounded-2xl border border-[#dfe5dc] bg-white p-4 shadow-sm transition-all duration-300"
+                  style={{
+                    opacity: mix(0.62, 1, completeStage),
+                    transform: `translateY(${mix(18, 0, completeStage)}px)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-md bg-[#eef6ef] text-[#237047]">
+                      <FileCheck2 className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <span className="rounded-full bg-[#fff8e8] px-2 py-1 text-xs font-semibold text-[#8a5b00]">
+                      checklist
+                    </span>
+                  </div>
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-[#6b746d]">
+                    Passport record
+                  </p>
+                  <div className="mt-4 h-2 overflow-hidden rounded-full bg-[#edf1ea]">
+                    <div
+                      className="h-full rounded-full bg-[#2f9d62] transition-[width] duration-200"
+                      style={{ width: `${readyPercent}%` }}
+                    />
+                  </div>
+                  <div className="mt-5 space-y-2">
+                    {checklist.map(({ label, icon: Icon }, index) => {
+                      const done = progress > 0.18 + index * 0.09;
                       return (
                         <div
                           className={`flex items-center justify-between rounded-md border px-3 py-2 text-sm transition-colors duration-300 ${
@@ -231,9 +253,12 @@ export function HowItWorksMotion() {
                               ? "border-[#d7e8d8] bg-[#eef6ef] text-[#237047]"
                               : "border-[#ead7a2] bg-[#fff8e8] text-[#8a5b00]"
                           }`}
-                          key={item}
+                          key={label}
                         >
-                          <span className="font-semibold">{item}</span>
+                          <span className="flex items-center gap-2 font-semibold">
+                            <Icon className="h-4 w-4" aria-hidden="true" />
+                            {label}
+                          </span>
                           {done ? (
                             <BadgeCheck className="h-4 w-4" aria-hidden="true" />
                           ) : (
@@ -241,57 +266,45 @@ export function HowItWorksMotion() {
                           )}
                         </div>
                       );
-                    },
-                  )}
-                </div>
-              </div>
-
-              {floatingFields.map(({ label, icon: Icon, startX, startY, endX, endY }) => {
-                const x = mix(startX, endX, assembleProgress);
-                const y = mix(startY, endY, assembleProgress);
-                const scale = mix(1, 0.82, assembleProgress);
-
-                return (
-                  <div
-                    className="absolute left-1/2 top-1/2 flex items-center gap-2 rounded-full border border-[#dfe5dc] bg-white px-3 py-2 text-sm font-semibold shadow-lg shadow-[#23432f]/10"
-                    key={label}
-                    style={{
-                      opacity: mix(1, 0.42, assembleProgress),
-                      transform: `translate(calc(-50% + ${x}px), calc(-50% + ${y}px)) scale(${scale})`,
-                    }}
-                  >
-                    <Icon className="h-4 w-4 text-[#237047]" aria-hidden="true" />
-                    {label}
+                    })}
                   </div>
-                );
-              })}
+                </div>
 
-              <div
-                className="absolute bottom-7 right-7 w-52 rounded-[22px] bg-[#17211b] p-4 text-white shadow-xl transition-transform duration-200"
-                style={{
-                  opacity: mix(0.35, 1, publishProgress),
-                  transform: `translateY(${mix(44, 0, publishProgress)}px) scale(${mix(
-                    0.88,
-                    1,
-                    publishProgress,
-                  )})`,
-                }}
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-sm font-semibold">QR passport</span>
-                  <QrCode className="h-4 w-4 text-white/70" />
+                <div
+                  className="rounded-2xl bg-[#17211b] p-4 text-white shadow-sm transition-all duration-300"
+                  style={{
+                    opacity: mix(0.42, 1, publishStage),
+                    transform: `translateY(${mix(28, 0, publishStage)}px)`,
+                  }}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-md bg-white/10 text-white">
+                      <QrCode className="h-5 w-5" aria-hidden="true" />
+                    </div>
+                    <span className="rounded-full bg-[#2f9d62] px-2 py-1 text-xs font-semibold">
+                      {publishStage > 0.75 ? "live" : "draft"}
+                    </span>
+                  </div>
+                  <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-white/60">
+                    QR passport
+                  </p>
+                  <h3 className="mt-3 text-xl font-semibold">Public page</h3>
+                  <div className="relative mt-5 overflow-hidden rounded-lg">
+                    <QrMark active={publishStage > 0.35} />
+                    <span
+                      className="absolute inset-x-0 h-0.5 bg-[#2f9d62] transition-[top] duration-200"
+                      style={{ top: `${mix(10, 88, publishStage)}%` }}
+                    />
+                  </div>
+                  <p className="mt-5 text-sm leading-6 text-white/70">
+                    A scan-ready page for materials, care, origin, repair, and
+                    recycling information.
+                  </p>
                 </div>
-                <div className="relative mt-4 overflow-hidden rounded-lg">
-                  <QrMark progress={progress} />
-                  <span
-                    className="absolute inset-x-0 h-0.5 bg-[#2f9d62]"
-                    style={{ top: `${mix(8, 88, publishProgress)}%` }}
-                  />
-                </div>
-                <p className="mt-4 text-xs leading-5 text-white/70">
-                  Scan-ready passport page for EU product information.
-                </p>
               </div>
+
+              <div className="pointer-events-none absolute left-[31%] top-[52%] h-0.5 w-[11%] bg-[#cfd8cf]" />
+              <div className="pointer-events-none absolute right-[31%] top-[52%] h-0.5 w-[11%] bg-[#cfd8cf]" />
             </div>
           </div>
         </div>
