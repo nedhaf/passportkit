@@ -22,6 +22,9 @@ export const translations = {
     "hero.primary": "Create your first passport",
     "hero.secondary": "View product dashboard",
     "hero.disclaimer": "Readiness support, not legal advice.",
+    "demoToast.title": "Demo mode",
+    "demoToast.body":
+      "This control is a placeholder in the current demo. In the product version it will connect to real data and workflows.",
     "euSource.label": "Official EU source",
     "euSource.title": "EU 2030 textile strategy and Digital Product Passports",
     "euSource.body":
@@ -170,6 +173,9 @@ export const translations = {
     "hero.primary": "Ersten Pass erstellen",
     "hero.secondary": "Produktdashboard ansehen",
     "hero.disclaimer": "Unterstützung zur Vorbereitung, keine Rechtsberatung.",
+    "demoToast.title": "Demo-Modus",
+    "demoToast.body":
+      "Dieses Element ist in der aktuellen Demo ein Platzhalter. In der Produktversion wird es mit echten Daten und Workflows verbunden.",
     "euSource.label": "Offizielle EU-Quelle",
     "euSource.title": "EU-Textilstrategie 2030 und digitale Produktpässe",
     "euSource.body":
@@ -318,6 +324,9 @@ export const translations = {
     "hero.primary": "Skapa första passet",
     "hero.secondary": "Visa produktdashboard",
     "hero.disclaimer": "Beredskapsstöd, inte juridisk rådgivning.",
+    "demoToast.title": "Demoläge",
+    "demoToast.body":
+      "Den här kontrollen är en platshållare i nuvarande demo. I produktversionen kopplas den till riktiga data och arbetsflöden.",
     "euSource.label": "Officiell EU-källa",
     "euSource.title": "EU:s textilstrategi 2030 och digitala produktpass",
     "euSource.body":
@@ -466,6 +475,9 @@ export const translations = {
     "hero.primary": "Kreiraj prvi pasoš",
     "hero.secondary": "Pogledaj dashboard",
     "hero.disclaimer": "Podrška za spremnost, ne pravni savjet.",
+    "demoToast.title": "Demo mod",
+    "demoToast.body":
+      "Ova kontrola je placeholder u trenutnom demu. U product verziji će biti povezana sa stvarnim podacima i workflowima.",
     "euSource.label": "Zvanični EU izvor",
     "euSource.title": "EU tekstilna strategija 2030 i digitalni pasoši proizvoda",
     "euSource.body":

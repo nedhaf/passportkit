@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
+import { DemoActionButton } from "@/components/demo-action-button";
 import { DeadlineTimer } from "@/components/deadline-timer";
 import { T } from "@/components/i18n-text";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -78,12 +79,12 @@ export default function ProductWizardPage() {
             </div>
             <div className="flex flex-wrap gap-3">
               <LanguageSwitcher />
-              <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]">
+              <DemoActionButton className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]">
                 <span className="flex items-center gap-2">
                   <Save className="h-4 w-4" aria-hidden="true" />
                   <T k="wizard.saveDraft" />
                 </span>
-              </button>
+              </DemoActionButton>
               <Link
                 className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]"
                 href="/p/linen-overshirt"
@@ -93,12 +94,12 @@ export default function ProductWizardPage() {
                   <T k="wizard.preview" />
                 </span>
               </Link>
-              <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2a342d]">
+              <DemoActionButton className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2a342d]">
                 <span className="flex items-center gap-2">
                   <QrCode className="h-4 w-4" aria-hidden="true" />
                   <T k="wizard.publish" />
                 </span>
-              </button>
+              </DemoActionButton>
             </div>
           </div>
 
@@ -150,13 +151,12 @@ export default function ProductWizardPage() {
           </div>
           <div className="mt-3 space-y-1">
             {steps.map(([step, state]) => (
-              <a
+              <DemoActionButton
                 className={`flex items-center justify-between rounded-md px-3 py-2 text-sm ${
                   step === "Recycling"
                     ? "bg-[#fff6df] font-semibold text-[#8a5b00]"
                     : "text-[#526057] hover:bg-[#f7f8f5]"
                 }`}
-                href="#"
                 key={step}
               >
                 {step}
@@ -165,7 +165,7 @@ export default function ProductWizardPage() {
                     state === "Complete" ? "bg-[#2f9d62]" : "bg-[#d39b2a]"
                   }`}
                 />
-              </a>
+              </DemoActionButton>
             ))}
           </div>
         </aside>
@@ -229,18 +229,18 @@ export default function ProductWizardPage() {
               <T k="wizard.saved" />
             </p>
             <div className="flex flex-wrap gap-3">
-              <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold">
+              <DemoActionButton className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]">
                 <span className="flex items-center gap-2">
                   <Download className="h-4 w-4" aria-hidden="true" />
                   <T k="wizard.download" />
                 </span>
-              </button>
-              <button className="rounded-md bg-[#2455a4] px-4 py-2 text-sm font-semibold text-white">
+              </DemoActionButton>
+              <DemoActionButton className="rounded-md bg-[#2455a4] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2f65b7]">
                 <span className="flex items-center gap-2">
                   <BadgeCheck className="h-4 w-4" aria-hidden="true" />
                   <T k="wizard.markComplete" />
                 </span>
-              </button>
+              </DemoActionButton>
             </div>
           </div>
         </section>

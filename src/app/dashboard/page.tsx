@@ -12,6 +12,7 @@ import {
   Upload,
 } from "lucide-react";
 import { DashboardProducts } from "@/components/dashboard-products";
+import { DemoActionButton } from "@/components/demo-action-button";
 import { DeadlineTimer } from "@/components/deadline-timer";
 import { T } from "@/components/i18n-text";
 import { LanguageSwitcher } from "@/components/language-switcher";
@@ -35,20 +36,19 @@ export default function DashboardPage() {
           <Logo />
           <nav className="mt-10 space-y-1">
             {navItems.map(({ label, icon: Icon }) => (
-              <a
-                className={`block rounded-md px-3 py-2 text-sm font-medium ${
+              <DemoActionButton
+                className={`block w-full rounded-md px-3 py-2 text-left text-sm font-medium ${
                   label === "dashboard.nav.dashboard"
                     ? "bg-[#eef6ef] text-[#237047]"
                     : "text-[#526057] hover:bg-[#f7f8f5]"
                 }`}
-                href="#"
                 key={label}
               >
                 <span className="flex items-center gap-2">
                   <Icon className="h-4 w-4" aria-hidden="true" />
                   <T k={label} />
                 </span>
-              </a>
+              </DemoActionButton>
             ))}
           </nav>
           <div className="mt-10 rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-4">
@@ -90,18 +90,18 @@ export default function DashboardPage() {
             <div>
               <div className="flex flex-wrap justify-start gap-3 xl:justify-end">
                 <LanguageSwitcher />
-                <button className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]">
+                <DemoActionButton className="rounded-md border border-[#c7d2c4] bg-white px-4 py-2 text-sm font-semibold transition hover:bg-[#f7f8f5]">
                   <span className="flex items-center gap-2">
                     <Upload className="h-4 w-4" aria-hidden="true" />
                     <T k="dashboard.import" />
                   </span>
-                </button>
-                <button className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2a342d]">
+                </DemoActionButton>
+                <DemoActionButton className="rounded-md bg-[#17211b] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#2a342d]">
                   <span className="flex items-center gap-2">
                     <Box className="h-4 w-4" aria-hidden="true" />
                     <T k="dashboard.add" />
                   </span>
-                </button>
+                </DemoActionButton>
               </div>
               <div className="mt-5 rounded-lg border border-[#ead7a2] bg-[#fff8e8] p-4">
                 <div className="flex items-center justify-between gap-4">

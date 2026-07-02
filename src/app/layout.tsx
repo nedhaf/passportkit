@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { AppToaster } from "@/components/app-toaster";
 import { LanguageProvider } from "@/components/language-provider";
 import "./globals.css";
 
@@ -19,7 +20,10 @@ export default function RootLayout({
       className="h-full antialiased"
     >
       <body className="min-h-full flex flex-col">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          <AppToaster />
+        </LanguageProvider>
       </body>
     </html>
   );
