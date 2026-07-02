@@ -1,65 +1,78 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-[#f7f8f5] px-6 py-8 text-[#17211b]">
+      <section className="mx-auto flex min-h-[calc(100vh-4rem)] w-full max-w-6xl flex-col justify-between rounded-lg border border-[#dfe5dc] bg-white p-8 shadow-sm">
+        <nav className="flex items-center justify-between">
+          <div className="text-lg font-semibold">PassportKit</div>
+          <div className="rounded-full bg-[#eef6ef] px-3 py-1 text-sm font-medium text-[#237047]">
+            Next.js + Vercel ready
+          </div>
+        </nav>
+
+        <div className="grid gap-10 py-16 lg:grid-cols-[1fr_420px] lg:items-center">
+          <div>
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.18em] text-[#2455a4]">
+              Validation prototype
+            </p>
+            <h1 className="max-w-3xl text-5xl font-semibold leading-tight">
+              QR product passports for small fashion brands.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#526057]">
+              We have the project scaffolded. Next we will turn this into the
+              PassportKit landing page, dashboard, wizard, and public passport
+              flow.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                className="rounded-md bg-[#17211b] px-5 py-3 text-sm font-semibold text-white"
+                href="/dashboard"
+              >
+                Build dashboard next
+              </a>
+              <a
+                className="rounded-md border border-[#cfd8cf] px-5 py-3 text-sm font-semibold text-[#17211b]"
+                href="/p/linen-overshirt"
+              >
+                Preview passport route
+              </a>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-[#dfe5dc] bg-[#fbfcfa] p-5">
+            <div className="mb-4 flex items-center justify-between">
+              <span className="text-sm font-semibold">Setup checklist</span>
+              <span className="rounded-full bg-[#eef6ef] px-2 py-1 text-xs font-semibold text-[#237047]">
+                3/5
+              </span>
+            </div>
+            <div className="space-y-3 text-sm">
+              {[
+                "Next.js App Router scaffolded",
+                "Tailwind CSS installed",
+                "Git repository initialized",
+                "Connect GitHub remote",
+                "Import project into Vercel",
+              ].map((item, index) => (
+                <div
+                  className="flex items-center gap-3 rounded-md border border-[#e5ebe2] bg-white px-3 py-3"
+                  key={item}
+                >
+                  <span
+                    className={`h-2.5 w-2.5 rounded-full ${
+                      index < 3 ? "bg-[#2f9d62]" : "bg-[#d39b2a]"
+                    }`}
+                  />
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+
+        <p className="text-sm text-[#6b746d]">
+          Readiness support, not legal advice.
+        </p>
+      </section>
+    </main>
   );
 }
